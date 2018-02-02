@@ -1,6 +1,6 @@
 # Purpose
 
-In this example I'm registering all allowed (by current implementation) handlers and I'm logging all events to the console so you can easily watch what is triggered and when.
+In this example I'm registering all allowed (by current implementation) handlers and I'm logging all events to the console so you can see when fires every event (I'm throttling `timeupdate` events only so they do not spam too much).
 
 # Usage
 
