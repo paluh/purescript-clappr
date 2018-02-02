@@ -1,0 +1,14 @@
+<!doctype>
+<html>
+<head>
+    <title>Purescript clappr events logging</title>
+</head>
+<body>
+  <p>Player should appear just below if you have configured hls address in index.html correctly.</p>
+  <p>Please check console to see event logging and check `src/Main.purs` for additional info.</p>
+  <div class="player" id="clappr"></div>
+  <script src="bundle.js"></script>
+  <script type="text/javascript">
+    clapprEventsLogger.main("#clappr")('https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8')();
+  </script>
+<body>
