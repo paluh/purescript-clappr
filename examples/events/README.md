@@ -10,7 +10,7 @@ In this example I'm registering all allowed (by current implementation) handlers
      $ bower update
      $ webpack --config webpack.config.js
      ```
-  2. Edit index.html and set your hls stream url there. Just google for some free hls streams ;-)
+  2. Edit index.html and set hls stream url there (replace `HTTP://EXAMPLE.COM/NOT-FOUND.m3u8`). Just google for some free hls streams if you are missing your own streaming server ;-)
 
   3. Run some simpe http server to serve local files. For example:
      ```shell
