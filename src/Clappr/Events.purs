@@ -157,7 +157,7 @@ onPlayerVolumeupdate
 onPlayerVolumeupdate clappr callback =
   runEffFn2 onPlayerVolumeupdateImpl clappr (mkEffFn1 callback)
 
-
+-- http://clappr.github.io/classes/Events.html
 -- onContainerDestroyed
 -- onContainerLoadedmetadata
 -- onContainerPlaybackdvrstatechanged
