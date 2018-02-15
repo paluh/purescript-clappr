@@ -20,13 +20,14 @@ type Options =
   }
 
 setup
-  ∷ ∀ r r'
+  ∷ ∀ r
   . RowLacks
       "watermark"
       (NativeOptionsRow
         ( "watermarkLink" ∷ Nullable String
         , "position" ∷ String
-        | r ))
+        | r
+        ))
   ⇒ RowLacks
       "watermarkLink"
       (NativeOptionsRow (position ∷ String | r))
@@ -37,7 +38,8 @@ setup
       ( position ∷ String
       , watermarkLink ∷ Nullable String
       , watermark ∷ String
-      | r )
+      | r
+      )
 setup wOpts opts
   = build builder $ opts { plugins = watermark : opts.plugins }
  where
