@@ -14,7 +14,8 @@ import Debug.Trace (traceAnyA)
 main :: String → String → forall e. Eff (clappr ∷ CLAPPR, console :: CONSOLE, dom ∷ DOM, exception ∷ EXCEPTION, ref ∷ REF | e) Unit
 main parentId source = do
   c ← clappr
-    { parent: ParentId parentId
+    { clickToPause: true
+    , parent: ParentId parentId
     , source: source
     }
   onContainerBitrate c (\b → do
@@ -28,6 +29,7 @@ main parentId source = do
     traceAnyA e)
   onPlayerError c (\e → do
     log "PLAYER_ERROR"
+    log "Have you changed fake hls url in index.html?"
     traceAnyA e)
   onPlayerFullscreen c (\b → do
     log "PLAYER_FULLSCREEN"
