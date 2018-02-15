@@ -1,11 +1,4 @@
 {
-  "name": "purescript-clappr",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "output"
-  ],
   "dependencies": {
     "clappr": "git@github.com:paluh/clappr#master",
     "purescript-record": "^0.2.6",
@@ -21,5 +14,17 @@
   "devDependencies": {
     "purescript-psci-support": "^3.0.0",
     "purescript-debug": "^3.0.0"
+  }
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "license": "BSD-3-Clause",
+  "name": "purescript-clappr",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paluh/purescript-clappr.git"
   }
 }
