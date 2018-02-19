@@ -8,6 +8,7 @@ import Clappr.Plugins.Favicon as Favicon
 import Clappr.Plugins.Poster as Poster
 import Clappr.Plugins.Watermark as Watermark
 import Clappr.Plugins.ResponsiveContainer as ResponsiveContainer
+import Clappr.Plugins.DvrControls as DvrControls
 import Data.Maybe (Maybe(..))
 
 opts parentId source =
@@ -32,6 +33,7 @@ run parentId source
   <<< ResponsiveContainer.setup
   <<< Watermark.setup watermark
   <<< Poster.setup ({ poster: Poster.Url posterUrl, showOnVideoEnd: false, showForNoOp: false })
+  <<< DvrControls.setup
   <<< toNativeOptions
   $ (opts parentId source)
 
