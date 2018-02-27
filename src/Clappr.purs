@@ -26,13 +26,19 @@ type Options = OptionsBase (parent ∷ Parent)
 clappr ∷ ∀ eff r. NativeOptions r → Eff (clappr ∷ CLAPPR, exception ∷ EXCEPTION, dom ∷ DOM | eff) Clappr
 clappr = runEffFn1 clapprImpl
 
+-- | Same as above - Pux/React bindings
+type NativeOptionsRowBase r =
+    ( source ∷ String
+    , plugins ∷ Array Plugin
+    | r
+    )
+
 type NativeOptionsRow r =
-  ( source ∷ String
-  , parentId ∷ Nullable String
-  , parent ∷ Nullable HTMLElement
-  , plugins ∷ Array Plugin
-  | r
-  )
+  NativeOptionsRowBase
+    ( parentId ∷ Nullable String
+    , parent ∷ Nullable HTMLElement
+    | r
+    )
 type NativeOptions r = Record (NativeOptionsRow r)
 
 foreign import clapprImpl ∷ ∀ eff p. EffFn1 (exception ∷ EXCEPTION, clappr ∷ CLAPPR, dom ∷ DOM | eff) (NativeOptions p) Clappr
