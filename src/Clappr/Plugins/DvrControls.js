@@ -5,4 +5,4 @@
 
 var clappr = require('clappr');
 
-exports.dvrControls = clappr.DvrControls;
+exports.dvrControls = clappr.DVRControls;
