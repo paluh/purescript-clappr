@@ -1,10 +1,10 @@
 # purescript-clappr
 
-Low level bindings to Clappr video player.
+Purescript bindings to Clappr video player.
 
-## API
+## Status
 
-Status of bindings:
+Bindings cover:
 
   * basic options
 
@@ -12,12 +12,12 @@ Status of bindings:
 
   * most of built-in plugins
 
-  * one extra plugin included - `ResponsiveContainer`
+  * one extra plugin - `ResponsiveContainer`
 
 
 ## Examples
 
-You can find two examples which show:
+Examples show:
 
   * how to attach event handlers
 
