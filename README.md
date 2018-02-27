@@ -4,8 +4,23 @@ Low level bindings to Clappr video player.
 
 ## API
 
-Currently this lib coverse basic player options, most of event handlers binders and some of built in plugins (with one extras included: `ResponsiveContainer`).
+Status of bindings:
+
+  * basic options
+
+  * most of event handlers binders
+
+  * most of built-in plugins
+
+  * one extra plugin included - `ResponsiveContainer`
+
 
 ## Examples
 
-In `./examples` dir you can find working examples of event handlers binding and plugins setup. I'm going to improve build up process soon...
+You can find two examples which show:
+
+  * how to attach event handlers
+
+  * how to configure plugins
+
+Both are self-containted - just check build instructions in their READMEs.
