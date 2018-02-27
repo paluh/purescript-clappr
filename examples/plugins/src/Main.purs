@@ -2,7 +2,7 @@ module Examples.Plugins.Main where
 
 import Prelude
 
-import Clappr (Options, Parent(..), clappr', toNativeOptions)
+import Clappr (Options, Parent(..), clappr, toNativeOptions)
 import Clappr.Plugins.ClickToPause as ClickToPause
 import Clappr.Plugins.Favicon as Favicon
 import Clappr.Plugins.Poster as Poster
@@ -27,7 +27,7 @@ watermark =
   }
 
 run parentId source
-  = clappr'
+  = clappr
   <<< Favicon.setup
   <<< ClickToPause.setup
   <<< ResponsiveContainer.setup

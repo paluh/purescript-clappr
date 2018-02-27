@@ -22,11 +22,8 @@ data Parent = ParentId String | Parent HTMLElement
 -- | Change parent so it could be only HTMLElement
 type Options = { source ∷ String, parent ∷ Parent }
 
-clappr ∷ ∀ eff. Options → Eff (clappr ∷ CLAPPR, exception ∷ EXCEPTION, dom ∷ DOM | eff) Clappr
-clappr = runEffFn1 clapprImpl <<< toNativeOptions
-
-clappr' ∷ ∀ eff r. NativeOptions r → Eff (clappr ∷ CLAPPR, exception ∷ EXCEPTION, dom ∷ DOM | eff) Clappr
-clappr' = runEffFn1 clapprImpl
+clappr ∷ ∀ eff r. NativeOptions r → Eff (clappr ∷ CLAPPR, exception ∷ EXCEPTION, dom ∷ DOM | eff) Clappr
+clappr = runEffFn1 clapprImpl
 
 type NativeOptionsRow r =
   ( source ∷ String
