@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "clappr": "git@github.com:paluh/clappr#master",
+    "clappr": "git@github.com:clappr/clappr#master",
     "purescript-record": "^0.2.6",
     "purescript-functions": "^3.0.0",
     "purescript-maybe": "^3.0.0",
