@@ -1,4 +1,4 @@
-module DvrControls where
+module Clappr.Plugins.DvrControls where
 
 import Clappr (Plugin, NativeOptions)
 import Data.Array ((:))
