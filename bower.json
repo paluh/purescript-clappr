@@ -9,7 +9,6 @@
     "purescript-functions": "^3.0.0",
     "purescript-maybe": "^3.0.0",
     "purescript-nullable": "^3.0.0",
-    "purescript-pux": "^12.0.0",
     "purescript-record": "^0.2.6"
   },
   "devDependencies": {
