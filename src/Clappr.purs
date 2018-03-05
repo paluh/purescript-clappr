@@ -17,7 +17,7 @@ foreign import data CLAPPR ∷ Effect
 foreign import data Plugin ∷ Type
 
 -- | This base config is reused by Pux/React bindings
-type OptionsBase o = { source ∷ String | o}
+type OptionsBase o = { baseUrl ∷ Maybe String, source ∷ String | o}
 
 data Parent = ParentId String | Parent HTMLElement
 -- | Change parent so it could be only HTMLElement
@@ -27,7 +27,8 @@ clappr ∷ ∀ eff r. NativeOptions r → Eff (clappr ∷ CLAPPR, exception ∷ 
 clappr = runEffFn1 clapprImpl
 
 type NativeOptionsRow r =
-  ( parentId ∷ Nullable String
+  ( baseUrl ∷ Nullable String
+  , parentId ∷ Nullable String
   , parent ∷ Nullable HTMLElement
   , plugins ∷ Array Plugin
   , source ∷ String
@@ -39,7 +40,12 @@ foreign import clapprImpl ∷ ∀ eff p. EffFn1 (exception ∷ EXCEPTION, clappr
 
 toNativeOptions ∷ Options → NativeOptions ()
 toNativeOptions options =
-  build parent { source: options.source, plugins: plugins }
+  build
+    parent
+    { baseUrl: toNullable options.baseUrl
+    , plugins: plugins
+    , source: options.source
+    }
  where
   _parentId = SProxy ∷ SProxy "parentId"
   _parent = SProxy ∷ SProxy "parent"

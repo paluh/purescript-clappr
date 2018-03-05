@@ -12,8 +12,9 @@ import Clappr.Plugins.DvrControls as DvrControls
 import Data.Maybe (Maybe(..))
 
 opts parentId source =
-  { source: source
+  { baseUrl: Nothing
   , parent: ParentId parentId
+  , source: source
   }
 
 posterUrl = "https://raw.githubusercontent.com/clappr/clappr/master/images/stats.jpg"

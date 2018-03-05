@@ -2,22 +2,26 @@ module Main where
 
 import Prelude
 
-import Clappr (CLAPPR, Parent(..), clappr)
+import Clappr (CLAPPR, Parent(..), clappr, toNativeOptions)
 import Clappr.Events (onContainerBitrate, onContainerError, onPlaybackError, onPlayerError, onPlayerFullscreen, onPlayerPause, onPlayerPlay, onPlayerReady, onPlayerResize, onPlayerTimeupdate, onPlayerVolumeupdate)
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Console (CONSOLE, log)
 import Control.Monad.Eff.Exception (EXCEPTION)
 import Control.Monad.Eff.Ref (REF, newRef, readRef, writeRef)
 import DOM (DOM)
+import Data.Maybe (Maybe(..))
 import Debug.Trace (traceAnyA)
 
 main :: String → String → forall e. Eff (clappr ∷ CLAPPR, console :: CONSOLE, dom ∷ DOM, exception ∷ EXCEPTION, ref ∷ REF | e) Unit
 main parentId source = do
-  c ← clappr
-    { clickToPause: true
-    , parent: ParentId parentId
-    , source: source
-    }
+  let
+    opts =
+      toNativeOptions
+        { baseUrl: Nothing
+        , parent: ParentId parentId
+        , source: source
+        }
+  c ← clappr opts
   onContainerBitrate c (\b → do
     log "CONTAINER_BITRATE"
     traceAnyA b)
