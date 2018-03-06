@@ -9,6 +9,7 @@ import Clappr.Plugins.Poster as Poster
 import Clappr.Plugins.Watermark as Watermark
 import Clappr.Plugins.ResponsiveContainer as ResponsiveContainer
 import Clappr.Plugins.DvrControls as DvrControls
+import Clappr.Plugins.Streamroot as Streamroot
 import Data.Maybe (Maybe(..))
 
 opts parentId source =
@@ -27,8 +28,16 @@ watermark =
   , url: logoUrl
   }
 
+
+p2p =
+  { mobileBrowserEnable: true
+  , streamrootKey: "YOUR KEY HERE"
+  , debug: true
+  }
+
 run parentId source
   = clappr
+  <<< Streamroot.setupPlayback (Just p2p)
   <<< Favicon.setup
   <<< ClickToPause.setup
   <<< ResponsiveContainer.setup

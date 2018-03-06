@@ -17,7 +17,13 @@ foreign import data CLAPPR ∷ Effect
 foreign import data Plugin ∷ Type
 
 -- | This base config is reused by Pux/React bindings
-type OptionsBase o = { baseUrl ∷ Maybe String, source ∷ String | o}
+type OptionsBase o =
+  { autoPlay ∷ Boolean
+  , baseUrl ∷ Maybe String
+  , mute ∷ Boolean
+  , source ∷ String
+  | o
+  }
 
 data Parent = ParentId String | Parent HTMLElement
 -- | Change parent so it could be only HTMLElement
@@ -27,7 +33,9 @@ clappr ∷ ∀ eff r. NativeOptions r → Eff (clappr ∷ CLAPPR, exception ∷ 
 clappr = runEffFn1 clapprImpl
 
 type NativeOptionsRow r =
-  ( baseUrl ∷ Nullable String
+  ( autoPlay ∷ Boolean
+  , baseUrl ∷ Nullable String
+  , mute ∷ Boolean
   , parentId ∷ Nullable String
   , parent ∷ Nullable HTMLElement
   , plugins ∷ Array Plugin
@@ -42,7 +50,9 @@ toNativeOptions ∷ Options → NativeOptions ()
 toNativeOptions options =
   build
     parent
-    { baseUrl: toNullable options.baseUrl
+    { autoPlay: options.autoPlay
+    , baseUrl: toNullable options.baseUrl
+    , mute: options.mute
     , plugins: plugins
     , source: options.source
     }
