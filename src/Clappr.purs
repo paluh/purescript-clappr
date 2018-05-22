@@ -15,11 +15,14 @@ import Type.Prelude (SProxy(..))
 foreign import data Clappr ∷ Type
 foreign import data CLAPPR ∷ Effect
 foreign import data Plugin ∷ Type
+foreign import flasHls ∷ Plugin
+foreign import hls ∷ Plugin
 
 -- | This base config is reused by Pux/React bindings
 type OptionsBase o =
   { autoPlay ∷ Boolean
   , baseUrl ∷ Maybe String
+  , hlsjsConfig ∷ Maybe HlsjsConfig
   , mute ∷ Boolean
   , source ∷ String
   | o
@@ -32,9 +35,19 @@ type Options = OptionsBase (parent ∷ Parent)
 clappr ∷ ∀ eff r. NativeOptions r → Eff (clappr ∷ CLAPPR, exception ∷ EXCEPTION, dom ∷ DOM | eff) Clappr
 clappr = runEffFn1 clapprImpl
 
+type HlsjsConfig =
+  { debug ∷ Boolean
+  , liveSyncDuration ∷ Int
+  , maxBufferSize ∷ Int
+  , maxBufferLength ∷ Int
+  }
+
+foreign import hlsjsDefaultConfig ∷ HlsjsConfig
+
 type NativeOptionsRow r =
   ( autoPlay ∷ Boolean
   , baseUrl ∷ Nullable String
+  , hlsjsConfig ∷ Nullable HlsjsConfig
   , mute ∷ Boolean
   , parentId ∷ Nullable String
   , parent ∷ Nullable HTMLElement
@@ -52,6 +65,7 @@ toNativeOptions options =
     parent
     { autoPlay: options.autoPlay
     , baseUrl: toNullable options.baseUrl
+    , hlsjsConfig: toNullable options.hlsjsConfig
     , mute: options.mute
     , plugins: plugins
     , source: options.source

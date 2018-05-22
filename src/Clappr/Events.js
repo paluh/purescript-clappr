@@ -11,7 +11,23 @@ exports.onContainerBitrateImpl = function(clappr, callback) {
 
 exports.onContainerErrorImpl = function(clappr, callback) {
   return clappr.on(Clappr.Events.CONTAINER_ERROR, callback);
-}
+};
+
+exports.onContainerPlaybackdvrstatechanged = function(clappr, callback) {
+  return clappr.on(Clappr.Events.CONTAINER_PLAYBACKDVRSTATECHANGED);
+};
+
+exports.onContainerPlaybackstateImpl = function(clappr, callback) {
+  return clappr.on(Clappr.Events.CONTAINER_PLAYBACKSTATE);
+};
+
+exports.onContainerReady = function(clappr, callback) {
+  return clappr.on(Clappr.Events.CONTAINER_READY);
+};
+
+exports.onContainerStatsReport = function(clappr, callback) {
+  return clappr.on(Clappr.Events.CONTAINER_STATS_REPORT);
+};
 
 exports.onPlaybackErrorImpl = function(clappr, callback) {
   return clappr.on(Clappr.Events.PLAYBACK_ERROR, callback);

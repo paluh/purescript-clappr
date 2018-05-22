@@ -50,6 +50,26 @@ onContainerError
 onContainerError clappr callback =
   runEffFn2 onContainerErrorImpl clappr (mkEffFn1 callback)
 
+-- foreign import onContainerPlaybackdvrstatechanged = function(clappr, callback) {
+-- foreign import onContainerPlaybackdvrstatechanged = function(clappr, callback) {
+foreign import data ContainerPlaybackState ∷ Type
+foreign import onContainerPlaybackstateImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (EffFn1 (ClapprEff eff) ContainerPlaybackState Unit) Unit
+
+onContainerPlaybackstate
+  ∷ forall eff
+  . Clappr
+  → (ContainerPlaybackState → Eff (ClapprEff eff) Unit)
+  → Eff (ClapprEff eff) Unit
+onContainerPlaybackstate clappr callback =
+  runEffFn2 onContainerPlaybackstateImpl clappr (mkEffFn1 callback)
+
+
+-- foreign import onContainerReady = function(clappr, callback) {
+-- foreign import onContainerReady = function(clappr, callback) {
+-- foreign import onContainerStatsReport = function(clappr, callback) {
+-- foreign import onContainerStatsReport = function(clappr, callback) {
+
+
 -- | XXX: Fix error type
 foreign import data PlaybackError ∷ Type
 foreign import onPlaybackErrorImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (EffFn1 (ClapprEff eff) PlaybackError Unit) Unit
@@ -160,8 +180,6 @@ onPlayerVolumeupdate clappr callback =
 -- http://clappr.github.io/classes/Events.html
 -- onContainerDestroyed
 -- onContainerLoadedmetadata
--- onContainerPlaybackdvrstatechanged
--- onContainerPlaybackstate
 -- onContainerReady
 -- onContainerStatsReport
 -- onContainerSubtitleAvailable

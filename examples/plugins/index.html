@@ -1,0 +1,32 @@
+<!doctype>
+<html>
+<head>
+    <title>purescript-clappr plugins example</title>
+</head>
+<body>
+  <h1>purescript-clappr plugins example</h1>
+  <p>
+  To run this example you have to compile it:
+  </p>
+<code>
+  $ pulp build --include ./examples/plugins/src
+</code>
+  <p>
+  Then run webpack build from examples dir.
+  </p>
+
+  </p>
+  <div id="player"></div>
+  <script type="text/javascript" src="./examplesPlugins.js"></script>
+  <script>
+    // provide hls url here
+    var source = "XXXXXXXXX";
+    var streamrootKey = null;
+    examplesPlugins.main({
+      source: source,
+      parentId: "#player",
+      streamrootKey: "848ff51f-dc32-485b-8de5-cae9f215d4f7"
+    })();
+  </script>
+
+</body>

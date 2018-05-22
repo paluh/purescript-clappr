@@ -1,8 +1,6 @@
 {
   "dependencies": {
     "clappr": "git@github.com:paluh/clappr#plugin-release",
-    "clappr0-hlsjs-provider": "git+https://github.com/streamroot/clappr0-hlsjs-provider.git#dev",
-    "streamroot-hlsjs-p2p-bundle": "npm:streamroot-hlsjs-p2p-bundle#4.3.63",
     "purescript-dom": "^4.15.0",
     "purescript-eff": "^3.1.0",
     "purescript-exceptions": "^3.1.0",
@@ -11,7 +9,12 @@
     "purescript-functions": "^3.0.0",
     "purescript-maybe": "^3.0.0",
     "purescript-nullable": "^3.0.0",
-    "purescript-record": "^0.2.6"
+    "purescript-record": "^0.2.6",
+    "purescript-typelevel-prelude": "^2.7.0",
+    "purescript-aff": "^4.1.1",
+    "purescript-affjax": "^5.0.0",
+    "purescript-numbers": "^5.0.0",
+    "purescript-variant": "^4.1.0"
   },
   "devDependencies": {
     "purescript-psci-support": "^3.0.0",
