@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "bower-resolve-webpack-plugin": "^1.0.4",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "clappr": "^0.2.94",
+    "hls.js": "^0.9.1"
+  }
+}
