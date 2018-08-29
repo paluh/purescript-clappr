@@ -2,6 +2,8 @@
 
 Purescript bindings to Clappr video player.
 
+__Not ported to ps-0.12 (tested against ps-0.11.7).__
+
 ## Status
 
 Bindings cover:
@@ -41,5 +43,5 @@ You can build examples against cloned library code:
 
   * Now edit `index.html` and provide your hls playlist url there (optionally you can provide also your streamroot key)
 
-  * Run some testing http server - for example: `$ python -m http.server`
+  * Run some testing http server (it should serve ./node_modules/clappr path for '.swf' file from root path) - for example: `$ python -m http.server`
 
