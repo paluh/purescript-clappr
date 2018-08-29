@@ -11,12 +11,20 @@ import Data.Maybe (Maybe(..))
 import Data.Nullable (Nullable, toNullable)
 import Data.Record.Builder (build, insert)
 import Type.Prelude (SProxy(..))
+import Unsafe.Coerce (unsafeCoerce)
 
 foreign import data Clappr ∷ Type
 foreign import data CLAPPR ∷ Effect
 foreign import data Plugin ∷ Type
-foreign import flasHls ∷ Plugin
+-- | Flash backend has some global initialization.
+-- | We are caching instance on window level to
+-- | force only single instance.
+foreign import data FlashPlugin ∷ Type
+foreign import flasHls ∷ ∀ eff. Eff (clappr ∷ CLAPPR | eff) FlashPlugin
 foreign import hls ∷ Plugin
+
+toPlugin ∷ FlashPlugin → Plugin
+toPlugin = unsafeCoerce
 
 -- | This base config is reused by Pux/React bindings
 type OptionsBase o =

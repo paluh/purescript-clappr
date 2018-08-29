@@ -2,10 +2,12 @@ module Examples.Plugins.Main where
 
 import Prelude
 
-import Clappr (Options, Parent(..), clappr, toNativeOptions)
+import Clappr (Options, Parent(..), clappr, flasHls, toNativeOptions)
 import Clappr.Plugins.ClickToPause as ClickToPause
 import Clappr.Plugins.DvrControls as DvrControls
 import Clappr.Plugins.Favicon as Favicon
+import Clappr.Plugins.FlasHls (flashVersion)
+import Clappr.Plugins.FlasHls (setup) as FlasHljs
 import Clappr.Plugins.FlasHls as FlasHls
 import Clappr.Plugins.PlayerSize (pct, px)
 import Clappr.Plugins.PlayerSize (setup) as PlayerSize
@@ -18,6 +20,8 @@ import Control.Monad.Aff (launchAff)
 import Control.Monad.Aff.Console (log)
 import Control.Monad.Eff.Class (liftEff)
 import Data.Maybe (Maybe(..))
+import Data.Nullable (toMaybe)
+import Debug.Trace (traceAnyA)
 
 opts parentId source =
   { autoPlay: false
@@ -39,12 +43,14 @@ watermark =
   }
 
 main {parentId, source, streamrootKey} = launchAff $ do
+  fv ← liftEff flashVersion
+  flash ← liftEff flasHls
+  traceAnyA fv
   let
-    baseUrl = "https://cdn.nadaje.com/video/1.0/assets/clappr"
-    o
-      = Favicon.setup
+    baseUrl = "/node_modules/clappr/dist"
+    o = FlasHls.setup fv flash baseUrl
+      <<< Favicon.setup
       <<< ClickToPause.setup
-      <<< FlasHls.setup baseUrl
       <<< Watermark.setup watermark
       <<< Poster.setup ({ poster: Poster.Url posterUrl, showOnVideoEnd: false, showForNoOp: false })
       <<< DvrControls.setup
