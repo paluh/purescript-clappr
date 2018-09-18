@@ -24,7 +24,7 @@ type Options =
 setup
   ∷ ∀ r
   . RowLacks "poster" (NativeOptionsRow r)
-  ⇒ Options
+  ⇒ Maybe Options
   → NativeOptions r
   → NativeOptions
     ( poster ∷
@@ -34,7 +34,7 @@ setup
       , url ∷ Foreign }
     | r
     )
-setup { poster: p, showForNoOp, showOnVideoEnd } opts =
+setup (Just { poster: p, showForNoOp, showOnVideoEnd }) opts =
   case p of
     Url url →
       insert
@@ -54,5 +54,16 @@ setup { poster: p, showForNoOp, showOnVideoEnd } opts =
         , url: undefined
         }
         opts'
+ where
+  opts' = opts { plugins = poster : opts.plugins }
+setup Nothing opts =
+  insert
+    (SProxy ∷ SProxy "poster")
+    { custom: undefined
+    , showForNoOp: false
+    , showOnVideoEnd: false
+    , url: undefined
+    }
+    opts'
  where
   opts' = opts { plugins = poster : opts.plugins }
