@@ -2,7 +2,7 @@ module Clappr.Plugins.Streamroot where
 
 import Prelude
 
-import Clappr (NativeOptions, NativeOptionsRow, Plugin, HlsjsConfig)
+import Clappr (NativeOptions, NativeOptionsRow, Plugin, HlsjsConfig) as Clappr
 import Control.Monad.Aff (Aff)
 import Control.Monad.Aff.Compat (EffFnAff, fromEffFnAff)
 import Data.Array ((:))
@@ -13,15 +13,17 @@ import Data.Tuple (Tuple(..))
 import Network.HTTP.Affjax (AJAX)
 import Type.Prelude (class RowLacks, SProxy(..))
 
-foreign import flashHls ∷ Plugin
-foreign import hls ∷ Plugin
+foreign import flashHls ∷ Clappr.Plugin
+foreign import hls ∷ Clappr.Plugin
 
-foreign import streamrootHlsjsImpl ∷ ∀ eff. String → EffFnAff (ajax ∷ AJAX | eff) Plugin
+foreign import streamrootHlsjsImpl ∷ ∀ eff. String → EffFnAff (ajax ∷ AJAX | eff) Clappr.Plugin
 
-streamrootHlsjs ∷ ∀ eff. String → Aff (ajax ∷ AJAX | eff) Plugin
+streamrootHlsjs ∷ ∀ eff. String → Aff (ajax ∷ AJAX | eff) Clappr.Plugin
 streamrootHlsjs = fromEffFnAff <<< streamrootHlsjsImpl
 
-data FetchedBeforeLoad = SecondsPrebuffereddBeforeLoad Int | FragmentsFetchedBeforeLoad Int
+data FetchedBeforeLoad
+  = SecondsPrebuffereddBeforeLoad Int
+  | FragmentsFetchedBeforeLoad Int
 
 type DnaConfig =
   { fetchBeforeLoad ∷ Maybe FetchedBeforeLoad
@@ -37,17 +39,19 @@ type DnaNativeConfig =
 defaultDnaConfig ∷ DnaConfig
 defaultDnaConfig = { property: Nothing, fetchBeforeLoad: Just (FragmentsFetchedBeforeLoad 3) }
 
-setupHlsjs ∷ HlsjsConfig → HlsjsConfig
+setupHlsjs ∷ Clappr.HlsjsConfig → Clappr.HlsjsConfig
 setupHlsjs hlsjsConfig =
   hlsjsConfig { maxBufferSize=0, maxBufferLength=30, liveSyncDuration=30 }
 
+type NativeOptionsRow r = (dnaConfig ∷ DnaNativeConfig | r)
+
 setup
   ∷ ∀ eff r
-  . RowLacks "dnaConfig" (NativeOptionsRow r)
+  . RowLacks "dnaConfig" (Clappr.NativeOptionsRow r)
   ⇒ String
   → DnaConfig
-  → NativeOptions r
-  → Aff (ajax ∷ AJAX | eff) (NativeOptions (dnaConfig ∷ DnaNativeConfig | r))
+  → Clappr.NativeOptions r
+  → Aff (ajax ∷ AJAX | eff) (Clappr.NativeOptions (NativeOptionsRow r))
 setup key dnaConfig opts = do
   streamroot ← streamrootHlsjs key
   pure $ insert (SProxy ∷ SProxy "dnaConfig") dnaConfig' $ opts

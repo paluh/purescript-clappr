@@ -1,6 +1,6 @@
 module Clappr.Plugins.Poster where
 
-import Clappr (NativeOptions, Plugin, NativeOptionsRow)
+import Clappr (NativeOptions, Plugin, NativeOptionsRow) as Clappr
 import Data.Array ((:))
 import Data.Foreign (Foreign)
 import Data.Foreign.Class (encode)
@@ -9,7 +9,7 @@ import Data.Maybe (Maybe(..))
 import Data.Record (insert)
 import Type.Prelude (class RowLacks, SProxy(..))
 
-foreign import poster ∷ Plugin
+foreign import poster ∷ Clappr.Plugin
 
 data Poster
   = Url String
@@ -21,19 +21,22 @@ type Options =
   , showForNoOp ∷ Boolean
   }
 
-setup
-  ∷ ∀ r
-  . RowLacks "poster" (NativeOptionsRow r)
-  ⇒ Maybe Options
-  → NativeOptions r
-  → NativeOptions
-    ( poster ∷
+type NativeOptionsRow r =
+  ( poster ∷
       { custom ∷ Foreign
       , showForNoOp ∷ Boolean
       , showOnVideoEnd ∷ Boolean
-      , url ∷ Foreign }
-    | r
-    )
+      , url ∷ Foreign
+      }
+  | r
+  )
+
+setup
+  ∷ ∀ r
+  . RowLacks "poster" (Clappr.NativeOptionsRow r)
+  ⇒ Maybe Options
+  → Clappr.NativeOptions r
+  → Clappr.NativeOptions (NativeOptionsRow r)
 setup (Just { poster: p, showForNoOp, showOnVideoEnd }) opts =
   case p of
     Url url →
