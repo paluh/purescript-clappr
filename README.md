@@ -25,8 +25,6 @@ Examples show:
 
   * how to configure plugins
 
-Both are self-containted - just check build instructions in their READMEs.
-
 ### Installation and compilation
 
 You can build examples against cloned library code:
@@ -41,7 +39,7 @@ You can build examples against cloned library code:
 
   * `cd ./examples/plugins`
 
-  * Now edit `index.html` and provide your hls playlist url there (optionally you can provide also your streamroot key)
+  * Now edit `index.html` and provide your video url (for example hls playlist url) there (optionally you can provide also your streamroot key)
 
   * Run some testing http server (it should serve ./node_modules/clappr path for '.swf' file from root path) - for example: `$ python -m http.server`
 
