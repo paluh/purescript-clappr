@@ -31,6 +31,7 @@ type OptionsBase o =
   { autoPlay ∷ Boolean
   , baseUrl ∷ Maybe String
   , hlsjsConfig ∷ Maybe HlsjsConfig
+  , hlsRecoverAttempts ∷ Maybe Int
   , mute ∷ Boolean
   , source ∷ String
   | o
@@ -56,6 +57,7 @@ type NativeOptionsRow r =
   ( autoPlay ∷ Boolean
   , baseUrl ∷ Nullable String
   , hlsjsConfig ∷ Nullable HlsjsConfig
+  , hlsRecoverAttempts ∷ Nullable Int
   , mute ∷ Boolean
   , parentId ∷ Nullable String
   , parent ∷ Nullable HTMLElement
@@ -74,6 +76,7 @@ toNativeOptions options =
     { autoPlay: options.autoPlay
     , baseUrl: toNullable options.baseUrl
     , hlsjsConfig: toNullable options.hlsjsConfig
+    , hlsRecoverAttempts: toNullable options.hlsRecoverAttempts
     , mute: options.mute
     , plugins: plugins
     , source: options.source
@@ -85,5 +88,3 @@ toNativeOptions options =
     ParentId p → insert _parentId (toNullable (Just p)) <<< insert _parent (toNullable Nothing)
     Parent p → insert _parentId (toNullable Nothing) <<< insert _parent (toNullable (Just p))
   plugins = []
-
-

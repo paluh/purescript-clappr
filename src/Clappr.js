@@ -1,4 +1,6 @@
-/* global exports */
+/* global alert, console, exports, require, setInterval, window */
+/* jshint -W097 */
+
 "use strict";
 
 // module Clappr
@@ -15,10 +17,11 @@ exports.flasHls = function() {
     window._clapprFlasHls = clappr.FlasHLS;
   }
   return window._clapprFlasHls;
-}
+};
 exports.hls = clappr.HLS;
 
 exports.clapprImpl = function(options) {
   options.hideMediaControl = true;
   return new clappr.Player(options);
 };
+
