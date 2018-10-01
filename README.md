@@ -14,7 +14,7 @@ Bindings cover:
 
   * most of built-in plugins
 
-  * one extra plugin - `ResponsiveContainer`
+  * two extra plugins: `ResponsiveContainer` and `ReplayOnBuffering`
 
 
 ## Examples
