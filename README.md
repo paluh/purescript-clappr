@@ -25,6 +25,17 @@ Examples show:
 
   * how to configure plugins
 
+### Webpack builds
+
+I'm using a combination of "hacks" to make clappr working. I think the most important piece is this:
+
+```javascript
+    alias: { Clappr: 'clappr/dist/clappr.js', 'clappr-thumbnails-plugin': 'clappr-thumbnails-plugin/dist/clappr-thumbnails-plugin.js' },
+```
+
+Please check `./examples/plugins/webpack.config.js` for details.
+
+
 ### Installation and compilation
 
 You can build examples against cloned library code:

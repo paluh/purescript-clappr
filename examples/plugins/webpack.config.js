@@ -11,6 +11,7 @@ module.exports = {
     path: path.resolve(__dirname),
   },
   resolve: {
+    alias: { Clappr: 'clappr/dist/clappr.js', 'clappr-thumbnails-plugin': 'clappr-thumbnails-plugin/dist/clappr-thumbnails-plugin.js' },
     plugins: [
       new BowerResolvePlugin()
     ],
