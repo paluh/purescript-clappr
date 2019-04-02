@@ -7,9 +7,10 @@
   <p>Player should appear just below if you have configured hls address in index.html correctly.</p>
   <p>Please check console to see event logging and also check `README.md` and `src/Main.purs` for additional info.</p>
   <div class="player" id="clappr"></div>
-  <script src="bundle.js"></script>
+  <script type="text/javascript" src="./examplesEvents.js"></script>
   <script type="text/javascript">
     // provide hls url in place of XXXXXX
-    clapprEventsLogger.main("#clappr")('XXXXXXX')();
+    var source = "https://stream8.nadaje.com:3001/recordings/process_type%3Dwowza-vhost%26service_id%3D4434/iHP1142.stream_aac_2019-03-25_10%3A04%3A09/recording.mp4";
+    examplesEvents.main({ parentId: "#clappr", source: source })();
   </script>
 <body>

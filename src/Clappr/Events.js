@@ -1,4 +1,4 @@
-/* global exports */
+/* global exports, require */
 "use strict";
 
 // module Clappr.Events
@@ -13,21 +13,26 @@ exports.onContainerErrorImpl = function(clappr, callback) {
   return clappr.on(Clappr.Events.CONTAINER_ERROR, callback);
 };
 
-exports.onContainerPlaybackdvrstatechanged = function(clappr, callback) {
-  return clappr.on(Clappr.Events.CONTAINER_PLAYBACKDVRSTATECHANGED);
-};
+// XXX:
+// Some handlers are not included because they are not tested yet.
+// Please open an issue with PR if you tested them.
+//
+// exports.onContainerPlaybackdvrstatechanged = function(clappr, callback) {
+//  return clappr.on(Clappr.Events.CONTAINER_PLAYBACKDVRSTATECHANGED);
+// };
 
 exports.onContainerPlaybackstateImpl = function(clappr, callback) {
   return clappr.on(Clappr.Events.CONTAINER_PLAYBACKSTATE);
 };
 
-exports.onContainerReady = function(clappr, callback) {
-  return clappr.on(Clappr.Events.CONTAINER_READY);
-};
-
-exports.onContainerStatsReport = function(clappr, callback) {
-  return clappr.on(Clappr.Events.CONTAINER_STATS_REPORT);
-};
+// exports.onContainerReady = function(clappr, callback) {
+//   return clappr.on(Clappr.Events.CONTAINER_READY);
+// };
+// 
+// exports.onContainerStatsReport = function(clappr, callback) {
+//   return clappr.on(Clappr.Events.CONTAINER_STATS_REPORT);
+// };
+// 
 
 exports.onPlaybackErrorImpl = function(clappr, callback) {
   return clappr.on(Clappr.Events.PLAYBACK_ERROR, callback);

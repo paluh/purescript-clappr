@@ -1,11 +1,15 @@
+/* global exports, require */
+
 const BowerResolvePlugin = require("bower-resolve-webpack-plugin");
+const path = require('path');
 
 module.exports = {
-  entry: './output/Main/index.js',
+  entry: path.resolve(__dirname, './output/Examples.Events.Main/index.js'),
   output: {
-    filename: 'bundle.js',
-    library: 'clapprEventsLogger',
-    libraryTarget: 'var'
+    filename: 'examplesEvents.js',
+    library: 'examplesEvents',
+    libraryTarget: 'var',
+    path: path.resolve(__dirname),
   },
   resolve: {
     plugins: [new BowerResolvePlugin()],

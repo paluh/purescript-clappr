@@ -2,25 +2,23 @@ module Clappr.Plugins.FlasHls where
 
 import Prelude
 
-import Clappr (FlashPlugin, NativeOptions, NativeOptionsRow, toPlugin)
-import Control.Monad.Eff (Eff, kind Effect)
+import Clappr (FlashPlugin, hls, NativeOptions, toPlugin)
 import Data.Array ((:))
 import Data.Maybe (Maybe(..))
 import Data.Nullable (Nullable, toMaybe, toNullable)
-import Data.Record (insert)
+import Effect (Effect)
+import Prim.Row (class Lacks)
+import Record (insert)
 import Type.Prelude (SProxy(..))
-import Type.Row (class RowLacks)
 
-foreign import data NAVIGATOR ∷ Effect
+foreign import flashVersionImpl ∷ Effect (Nullable String)
 
-foreign import flashVersionImpl ∷ ∀ eff. Eff (navigator ∷ NAVIGATOR | eff) (Nullable String)
-
-flashVersion ∷ ∀ eff. Eff (navigator ∷ NAVIGATOR | eff) (Maybe String)
+flashVersion ∷ Effect (Maybe String)
 flashVersion = toMaybe <$> flashVersionImpl
 
 setup
   ∷ ∀ r
-  . RowLacks "flasHls" (NativeOptionsRow r)
+  . Lacks "flasHls" r
   ⇒ Maybe String
   → FlashPlugin
   → String
@@ -31,7 +29,7 @@ setup flashVersionVal flashPlugin baseUrl opts =
     flasHls = toPlugin flashPlugin
     opts' = case flashVersionVal of
       Just _ →
-        opts { plugins = flasHls : opts.plugins, baseUrl = toNullable $ Just baseUrl }
+        opts { plugins = flasHls : hls: opts.plugins, baseUrl = toNullable $ Just baseUrl }
       Nothing →
         opts { baseUrl = toNullable $ Nothing }
   in

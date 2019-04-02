@@ -2,31 +2,36 @@
 <html>
 <head>
     <title>purescript-clappr plugins example</title>
+    <!-- let's use bootstrap to test responsive container plugin -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 </head>
 <body>
-  <h1>purescript-clappr plugins example</h1>
-  <p>
-  To run this example you have to compile it:
-  </p>
-<code>
-  $ pulp build --include ./examples/plugins/src
-</code>
-  <p>
-  Then run webpack build from examples dir.
-  </p>
-
-  </p>
-  <div id="player"></div>
-  <script type="text/javascript" src="./examplesPlugins.js"></script>
-  <script>
-    // provide hls url here
-    var source = "xXXX";
-    var streamrootKey = null;
-    examplesPlugins.main({
-      source: source,
-      parentId: "#player",
-      streamrootKey: streamrootKey
-    })();
-  </script>
-
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>purescript-clappr plugins example</h1>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <p>
+      To run this example you have to compile it - there is a `Makefile` in root directory and instruction in README how to do this ;-)
+      </p>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <p>
+      To run this example you have to compile it - there is a `Makefile` in root directory and instruction in README how to do this ;-)
+      </p>
+      <div id="player"></div>
+      <script type="text/javascript" src="./examplesPlugins.js"></script>
+      <script>
+        // provide hls url here
+        // var source = "https://stream8.nadaje.com:3001/recordings/process_type%3Dwowza-vhost%26service_id%3D4434/iHP1142.stream_aac_2019-03-25_10%3A04%3A09/recording.mp4";
+        var source = "https://1808506050.rsc.cdn77.org/live/studiorw/playlist.m3u8";
+        examplesPlugins.main({
+          source: source,
+          parentId: "#player"
+        })();
+      </script>
+    </div>
+  </div>
+</div>
 </body>

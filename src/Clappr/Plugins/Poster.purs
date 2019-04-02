@@ -1,13 +1,15 @@
 module Clappr.Plugins.Poster where
 
-import Clappr (NativeOptions, Plugin, NativeOptionsRow) as Clappr
+import Clappr (NativeOptionsRow, Plugin) as Clappr
 import Data.Array ((:))
-import Data.Foreign (Foreign)
-import Data.Foreign.Class (encode)
-import Data.Foreign.NullOrUndefined (NullOrUndefined(..), undefined)
 import Data.Maybe (Maybe(..))
-import Data.Record (insert)
-import Type.Prelude (class RowLacks, SProxy(..))
+import Foreign (Foreign)
+import Foreign.Class (encode)
+import Foreign.NullOrUndefined (undefined)
+import Prim.Row (class Lacks)
+import Record (insert)
+import Type.Prelude (SProxy(..))
+import Type.Row (type (+))
 
 foreign import poster ∷ Clappr.Plugin
 
@@ -21,22 +23,21 @@ type Options =
   , showForNoOp ∷ Boolean
   }
 
-type NativeOptionsRow r =
-  ( poster ∷
-      { custom ∷ Foreign
-      , showForNoOp ∷ Boolean
-      , showOnVideoEnd ∷ Boolean
-      , url ∷ Foreign
-      }
-  | r
-  )
+type NativePosterOptions =
+  { custom ∷ Foreign
+  , showForNoOp ∷ Boolean
+  , showOnVideoEnd ∷ Boolean
+  , url ∷ Foreign
+  }
+
+type NativeOptionsRow r = ( poster ∷ NativePosterOptions | r )
 
 setup
   ∷ ∀ r
-  . RowLacks "poster" (Clappr.NativeOptionsRow r)
+  . Lacks "poster" r
   ⇒ Maybe Options
-  → Clappr.NativeOptions r
-  → Clappr.NativeOptions (NativeOptionsRow r)
+  → { | Clappr.NativeOptionsRow + r }
+  → { | Clappr.NativeOptionsRow + NativeOptionsRow + r }
 setup (Just { poster: p, showForNoOp, showOnVideoEnd }) opts =
   case p of
     Url url →
@@ -45,13 +46,13 @@ setup (Just { poster: p, showForNoOp, showOnVideoEnd }) opts =
         { custom: undefined
         , showForNoOp
         , showOnVideoEnd
-        , url: encode (NullOrUndefined (Just url))
+        , url: encode (Just url)
         }
         opts'
     Background b →
       insert
         (SProxy ∷ SProxy "poster")
-        { custom: encode (NullOrUndefined (Just b))
+        { custom: encode (Just b)
         , showForNoOp
         , showOnVideoEnd
         , url: undefined

@@ -2,12 +2,13 @@ module Clappr.Plugins.Watermark where
 
 import Prelude
 
-import Clappr (NativeOptions, Plugin, NativeOptionsRow)
+import Clappr (NativeOptions, Plugin)
 import Data.Array ((:))
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toNullable)
-import Data.Record.Builder (insert, build)
-import Type.Prelude (class RowLacks, SProxy(..))
+import Prim.Row (class Lacks)
+import Record.Builder (insert, build)
+import Type.Prelude (SProxy(..))
 
 foreign import watermark ∷ Plugin
 
@@ -21,17 +22,9 @@ type Options =
 
 setup
   ∷ ∀ r
-  . RowLacks
-      "watermark"
-      (NativeOptionsRow
-        ( "watermarkLink" ∷ Nullable String
-        , "position" ∷ String
-        | r
-        ))
-  ⇒ RowLacks
-      "watermarkLink"
-      (NativeOptionsRow (position ∷ String | r))
-  ⇒ RowLacks "position" (NativeOptionsRow r)
+  . Lacks "watermark" r
+  ⇒ Lacks "watermarkLink" r
+  ⇒ Lacks "position" r
   ⇒ Options
   → NativeOptions r
   → NativeOptions

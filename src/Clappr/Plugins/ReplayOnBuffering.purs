@@ -2,10 +2,11 @@ module Clappr.Plugins.ReplayOnBuffering where
 
 import Prelude
 
-import Clappr (NativeOptionsRow, Plugin, NativeOptions) as Clappr
+import Clappr (NativeOptions, Plugin) as Clappr
 import Data.Array ((:))
-import Data.Record (insert)
-import Type.Prelude (class RowLacks, SProxy(..))
+import Prim.Row (class Lacks)
+import Record (insert)
+import Type.Prelude (SProxy(..))
 
 foreign import replayOnBuffering ∷ Clappr.Plugin
 
@@ -15,7 +16,7 @@ type NativeOptionsRow r = (replayBufferingTimeout ∷ Int | r)
 
 setup
   ∷ ∀ r
-  . RowLacks "replayBufferingTimeout" (Clappr.NativeOptionsRow r)
+  . Lacks "replayBufferingTimeout" r
   ⇒ Timeout
   → Clappr.NativeOptions r
   → Clappr.NativeOptions (NativeOptionsRow r)

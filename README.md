@@ -16,24 +16,34 @@ Bindings cover:
 
   * two extra plugins: `ResponsiveContainer` and `ReplayOnBuffering`
 
+## Extra Plugins
+
+  * `ResponsiveContainer` keeps proportions provided by user and resizing to the parent container
+
+## Installation
+
+You should install npm packages which can be found in `./package.json` like (`clappr`, `clappr-thumbnails-plugin`) by yourself to use this lib in your project as this transitive dependencies won't be installed by `bower`, `psc-package` or `spago`.
 
 ## Examples
 
-Examples show:
+There are separate examples provided:
 
-  * how to attach event handlers
+  * `examples/simple` - just shows how to use basic clappr player,
 
-  * how to configure plugins
+  * `examples/events` - provides example of how to attach event handlers,
+
+  * `examples/plugins` - contains code which configures and uses some provided by this lib plugins.
 
 ### Webpack builds
 
-I'm using a combination of "hacks" to make clappr working. I think the most important piece is this:
+
+I'm using a combination of "hacks" to make clappr build working. I think the most important piece is this:
 
 ```javascript
     alias: { Clappr: 'clappr/dist/clappr.js', 'clappr-thumbnails-plugin': 'clappr-thumbnails-plugin/dist/clappr-thumbnails-plugin.js' },
 ```
 
-Please check `./examples/plugins/webpack.config.js` for details.
+Please check for example `./examples/simple/webpack.config.js` for details.
 
 
 ### Installation and compilation
@@ -44,13 +54,15 @@ You can build examples against cloned library code:
 
   * `$ bower install`
 
+Here we are building example for plugins usage:
+
   * `$ pulp build -I examples/plugins/src --build-path examples/plugins/output`
 
   * `$ webpack --config examples/plugins/webpack.config.js`
 
   * `cd ./examples/plugins`
 
-  * Now edit `index.html` and provide your video url (for example hls playlist url) there (optionally you can provide also your streamroot key)
+  * Now edit `./examples/plugins/index.html` and provide your video url (for example hls playlist url) there (optionally you can provide also your streamroot key)
 
-  * Run some testing http server (it should serve ./node_modules/clappr path for '.swf' file from root path) - for example: `$ python -m http.server`
+  * Run your favorite testing http server from within example directory (it should serve ./node_modules/clappr path for '.swf' file from root path) - for example: `$ python -m http.server`
 

@@ -1,14 +1,15 @@
 module Clappr.Plugins.Favicon where
 
-import Clappr (NativeOptions, Plugin, NativeOptionsRow)
+import Clappr (NativeOptions, Plugin)
 import Data.Array ((:))
-import Data.Record (insert)
-import Type.Prelude (class RowLacks, SProxy(SProxy))
+import Prim.Row (class Lacks)
+import Record (insert)
+import Type.Prelude (SProxy(SProxy))
 
 foreign import favicon ∷ Plugin
 
 setup ∷ ∀ r
-  . RowLacks "changeFavicon" (NativeOptionsRow r)
+  . Lacks "changeFavicon" r
   ⇒ NativeOptions r
   → NativeOptions (changeFavicon ∷ Boolean | r)
 setup opts =

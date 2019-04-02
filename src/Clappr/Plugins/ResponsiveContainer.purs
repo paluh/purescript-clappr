@@ -1,9 +1,10 @@
 module Clappr.Plugins.ResponsiveContainer where
 
-import Clappr (NativeOptionsRow, Plugin, NativeOptions) as Clappr
+import Clappr (NativeOptions, Plugin) as Clappr
 import Data.Array ((:))
-import Data.Record (insert)
-import Type.Prelude (class RowLacks, SProxy(..))
+import Prim.Row (class Lacks)
+import Record (insert)
+import Type.Prelude (SProxy(..))
 
 foreign import responsiveContainer ∷ Clappr.Plugin
 
@@ -11,8 +12,8 @@ type NativeOptionsRow r = (height ∷ Number, width ∷ Number | r)
 
 setup
   ∷ ∀ r
-  . RowLacks "width" (Clappr.NativeOptionsRow r)
-  ⇒ RowLacks "height" (Clappr.NativeOptionsRow (width ∷ Number | r))
+  . Lacks "width" r
+  ⇒ Lacks "height" r
   ⇒ { height ∷ Number, width ∷ Number }
   → Clappr.NativeOptions r
   → Clappr.NativeOptions (NativeOptionsRow r)

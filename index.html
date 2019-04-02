@@ -3,14 +3,38 @@
 <head>
     <title>purescript-clappr plugins example</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+    <script>
+      var clappr = Clappr;
+    </script>
+    <script type="text/javascript" src="./node_modules/vast-ads/dist/vast-ads.js"></script>
 </head>
 <body>
   <div class="container">
     <div class="row">
       <div class="col-12">
+      <a href="./examples/simple/index.html">Simple example</a>
       <a href="./examples/plugins/index.html">Plugins example</a>
+      <a href="./examples/events/index.html">Events example</a>
       </div>
     </div>
+    <div id="player"></div>
+    <script>
+      // var source = 'http://stream4.nadaje.com:8580/live/stream-1/playlist.m3u8';
+      var source = 'http://stream5.nadaje.com:16436/live/stream-1/playlist.m3u8';
+      window.player = new Clappr.Player({
+        plugins: {
+          'core': [VastAds]
+        },
+        VastAdsConfig: {
+          AdXMLUrl: 'http://adx.adform.net/adx/?mid=656537&t=2'
+        },
+        source: source,
+        parentId: "#player",
+        autoPlay: true,
+        mute: true
+      });
+    </script>
   </div>
 </body>
 </html>

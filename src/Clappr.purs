@@ -2,25 +2,22 @@ module Clappr where
 
 import Prelude
 
-import Control.Monad.Eff (Eff, kind Effect)
-import Control.Monad.Eff.Exception (EXCEPTION)
-import Control.Monad.Eff.Uncurried (EffFn1, runEffFn1)
-import DOM (DOM)
-import DOM.HTML.Types (HTMLElement)
 import Data.Maybe (Maybe(..))
 import Data.Nullable (Nullable, toNullable)
-import Data.Record.Builder (build, insert)
+import Effect (Effect)
+import Effect.Uncurried (EffectFn1, runEffectFn1)
+import Record.Builder (build, insert)
 import Type.Prelude (SProxy(..))
 import Unsafe.Coerce (unsafeCoerce)
+import Web.HTML (HTMLElement)
 
 foreign import data Clappr ∷ Type
-foreign import data CLAPPR ∷ Effect
 foreign import data Plugin ∷ Type
 -- | Flash backend has some global initialization.
 -- | We are caching instance on window level to
 -- | force only single instance.
 foreign import data FlashPlugin ∷ Type
-foreign import flasHls ∷ ∀ eff. Eff (clappr ∷ CLAPPR | eff) FlashPlugin
+foreign import flasHls ∷ Effect FlashPlugin
 foreign import hls ∷ Plugin
 
 toPlugin ∷ FlashPlugin → Plugin
@@ -41,8 +38,8 @@ data Parent = ParentId String | Parent HTMLElement
 -- | Change parent so it could be only HTMLElement
 type Options = OptionsBase (parent ∷ Parent)
 
-clappr ∷ ∀ eff r. NativeOptions r → Eff (clappr ∷ CLAPPR, exception ∷ EXCEPTION, dom ∷ DOM | eff) Clappr
-clappr = runEffFn1 clapprImpl
+clappr ∷ ∀ r. NativeOptions r → Effect Clappr
+clappr = runEffectFn1 clapprImpl
 
 type HlsjsConfig =
   { debug ∷ Boolean
@@ -67,20 +64,18 @@ type NativeOptionsRow r =
   )
 type NativeOptions r = Record (NativeOptionsRow r)
 
-foreign import clapprImpl ∷ ∀ eff p. EffFn1 (exception ∷ EXCEPTION, clappr ∷ CLAPPR, dom ∷ DOM | eff) (NativeOptions p) Clappr
+foreign import clapprImpl ∷ ∀ p. EffectFn1 (NativeOptions p) Clappr
 
 toNativeOptions ∷ Options → NativeOptions ()
-toNativeOptions options =
-  build
-    parent
-    { autoPlay: options.autoPlay
-    , baseUrl: toNullable options.baseUrl
-    , hlsjsConfig: toNullable options.hlsjsConfig
-    , hlsRecoverAttempts: toNullable options.hlsRecoverAttempts
-    , mute: options.mute
-    , plugins: plugins
-    , source: options.source
-    }
+toNativeOptions options = build parent
+  { autoPlay: options.autoPlay
+  , baseUrl: toNullable options.baseUrl
+  , hlsjsConfig: toNullable options.hlsjsConfig
+  , hlsRecoverAttempts: toNullable options.hlsRecoverAttempts
+  , mute: options.mute
+  , plugins: plugins
+  , source: options.source
+  }
  where
   _parentId = SProxy ∷ SProxy "parentId"
   _parent = SProxy ∷ SProxy "parent"

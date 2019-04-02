@@ -2,12 +2,13 @@ module Clappr.Plugins.Thumbnails where
 
 import Prelude
 
-import Clappr (NativeOptionsRow, Plugin, NativeOptions) as Clappr
+import Clappr (NativeOptions, Plugin) as Clappr
 import Data.Array ((:))
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toNullable)
-import Data.Record (insert)
-import Type.Prelude (class RowLacks, SProxy(..))
+import Prim.Row (class Lacks)
+import Record (insert)
+import Type.Prelude (SProxy(..))
 
 foreign import thumbnails ∷ Clappr.Plugin
 
@@ -29,7 +30,7 @@ type NativeOptionsRow r = (scrubThumbnails ∷ NativeOptions | r)
 
 setup
   ∷ ∀ r
-  . RowLacks "scrubThumbnails" (Clappr.NativeOptionsRow r)
+  . Lacks "scrubThumbnails" r
   ⇒ Options
   → Clappr.NativeOptions r
   → Clappr.NativeOptions (NativeOptionsRow r)

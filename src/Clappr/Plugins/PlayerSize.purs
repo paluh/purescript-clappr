@@ -2,11 +2,12 @@ module Clappr.Plugins.PlayerSize where
 
 import Prelude
 
-import Clappr (NativeOptionsRow, NativeOptions)
+import Clappr (NativeOptions)
 import Data.Number.Format (toString)
-import Data.Record (insert)
 import Data.Variant (Variant, case_, expand, inj, on)
-import Type.Prelude (class RowLacks, SProxy(..))
+import Prim.Row (class Lacks)
+import Record (insert)
+import Type.Prelude (SProxy(..))
 
 type Pct v = (pct :: Number | v)
 
@@ -25,8 +26,8 @@ type Width = Variant (Pct (Px ()))
 
 setup
   ∷ ∀ r
-  . RowLacks "width" (NativeOptionsRow r)
-  ⇒ RowLacks "height" (NativeOptionsRow (width ∷ String | r))
+  . Lacks "width" r
+  ⇒ Lacks "height" r
   ⇒ { height ∷ Variant (Px ()), width ∷ Width }
   → NativeOptions r
   → NativeOptions (height ∷ String, width ∷ String | r)

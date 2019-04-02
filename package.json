@@ -1,10 +1,14 @@
 {
   "devDependencies": {
     "bower-resolve-webpack-plugin": "^1.0.4",
+    "pulp": "^12.3.1",
     "webpack": "^3.10.0"
   },
   "dependencies": {
     "clappr": "^0.2.94",
-    "hls.js": "^0.9.1"
+    "clappr-ad-plugin": "git+https://github.com/canny-wasp/clappr-vast-ad-plugin.git",
+    "clappr-thumbnails-plugin": "^3.7.0",
+    "hls.js": "^0.9.1",
+    "vast-ads": "git+https://git@github.com/mycujoo/clappr-vast-plugin.git"
   }
 }

@@ -1,24 +1,26 @@
 {
   "dependencies": {
-    "clappr": "git@github.com:paluh/clappr#plugin-release",
-    "purescript-dom": "^4.15.0",
-    "purescript-eff": "^3.1.0",
-    "purescript-exceptions": "^3.1.0",
-    "purescript-foreign": "^4.0.1",
-    "purescript-foreign-generic": "^5.0.0",
-    "purescript-functions": "^3.0.0",
-    "purescript-maybe": "^3.0.0",
-    "purescript-nullable": "^3.0.0",
-    "purescript-record": "^0.2.6",
-    "purescript-typelevel-prelude": "^2.7.0",
-    "purescript-aff": "^4.1.1",
-    "purescript-affjax": "^5.0.0",
-    "purescript-numbers": "^5.0.0",
-    "purescript-variant": "^4.1.0"
+    "clappr": "git@github.com:clappr/clappr",
+    "purescript-web-dom": "",
+    "purescript-web-html": "",
+    "purescript-effect": "",
+    "purescript-exceptions": "",
+    "purescript-foreign": "",
+    "purescript-foreign-generic": "",
+    "purescript-functions": "",
+    "purescript-maybe": "",
+    "purescript-nullable": "",
+    "purescript-record": "",
+    "purescript-typelevel-prelude": "",
+    "purescript-aff": "",
+    "purescript-affjax": "",
+    "purescript-numbers": "",
+    "purescript-variant": ""
   },
   "devDependencies": {
-    "purescript-psci-support": "^3.0.0",
-    "purescript-debug": "^3.0.0"
+    "purescript-psci-support": "",
+    "purescript-debug": "",
+    "purescript-refs": "^4.1.0"
   },
   "ignore": [
     "**/.*",

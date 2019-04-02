@@ -2,16 +2,13 @@ module Clappr.Events where
 
 import Prelude
 
-import Clappr (CLAPPR, Clappr)
-import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Exception (EXCEPTION)
-import Control.Monad.Eff.Uncurried (EffFn1, EffFn2, mkEffFn1, runEffFn2)
+import Clappr (Clappr)
 import Data.Maybe (Maybe)
 import Data.Nullable (Nullable, toMaybe)
-import Data.Record (modify)
+import Effect (Effect)
+import Effect.Uncurried (EffectFn1, EffectFn2, mkEffectFn1, runEffectFn2)
+import Record (modify)
 import Type.Prelude (SProxy(..))
-
-type ClapprEff eff = (exception ∷ EXCEPTION, clappr ∷ CLAPPR | eff)
 
 type NativeBitrate =
   { bandwidth ∷ Nullable Int
@@ -19,7 +16,7 @@ type NativeBitrate =
   , width ∷ Int
   }
 
-foreign import onContainerBitrateImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (EffFn1 (ClapprEff eff) NativeBitrate Unit) Unit
+foreign import onContainerBitrateImpl ∷ EffectFn2 Clappr (EffectFn1 NativeBitrate Unit) Unit
 
 type Bitrate =
   { bandwidth ∷ Maybe Int
@@ -28,40 +25,37 @@ type Bitrate =
   }
 
 onContainerBitrate
-  ∷ forall eff
-  . Clappr
-  → (Bitrate → Eff (ClapprEff eff) Unit)
-  → Eff (ClapprEff eff) Unit
+  ∷ Clappr
+  → (Bitrate → Effect Unit)
+  → Effect Unit
 onContainerBitrate clappr callback =
-  runEffFn2 onContainerBitrateImpl clappr callback'
+  runEffectFn2 onContainerBitrateImpl clappr callback'
  where
   fromNativeBitrate = modify (SProxy ∷ SProxy "bandwidth") toMaybe
-  callback' = mkEffFn1 (callback <<< fromNativeBitrate)
+  callback' = mkEffectFn1 (callback <<< fromNativeBitrate)
 
 -- | XXX: Fix error type
 foreign import data ContainerError ∷ Type
-foreign import onContainerErrorImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (EffFn1 (ClapprEff eff) ContainerError Unit) Unit
+foreign import onContainerErrorImpl ∷ EffectFn2 Clappr (EffectFn1 ContainerError Unit) Unit
 
 onContainerError
-  ∷ forall eff
-  . Clappr
-  → (ContainerError → Eff (ClapprEff eff) Unit)
-  → Eff (ClapprEff eff) Unit
+  ∷ Clappr
+  → (ContainerError → Effect Unit)
+  → Effect Unit
 onContainerError clappr callback =
-  runEffFn2 onContainerErrorImpl clappr (mkEffFn1 callback)
+  runEffectFn2 onContainerErrorImpl clappr (mkEffectFn1 callback)
 
 -- foreign import onContainerPlaybackdvrstatechanged = function(clappr, callback) {
--- foreign import onContainerPlaybackdvrstatechanged = function(clappr, callback) {
+
 foreign import data ContainerPlaybackState ∷ Type
-foreign import onContainerPlaybackstateImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (EffFn1 (ClapprEff eff) ContainerPlaybackState Unit) Unit
+foreign import onContainerPlaybackstateImpl ∷ EffectFn2 Clappr (EffectFn1 ContainerPlaybackState Unit) Unit
 
 onContainerPlaybackstate
-  ∷ forall eff
-  . Clappr
-  → (ContainerPlaybackState → Eff (ClapprEff eff) Unit)
-  → Eff (ClapprEff eff) Unit
+  ∷ Clappr
+  → (ContainerPlaybackState → Effect Unit)
+  → Effect Unit
 onContainerPlaybackstate clappr callback =
-  runEffFn2 onContainerPlaybackstateImpl clappr (mkEffFn1 callback)
+  runEffectFn2 onContainerPlaybackstateImpl clappr (mkEffectFn1 callback)
 
 
 -- foreign import onContainerReady = function(clappr, callback) {
@@ -72,110 +66,100 @@ onContainerPlaybackstate clappr callback =
 
 -- | XXX: Fix error type
 foreign import data PlaybackError ∷ Type
-foreign import onPlaybackErrorImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (EffFn1 (ClapprEff eff) PlaybackError Unit) Unit
+foreign import onPlaybackErrorImpl ∷ EffectFn2 Clappr (EffectFn1 PlaybackError Unit) Unit
 
 onPlaybackError
-  ∷ forall eff
-  . Clappr
-  → (PlaybackError → Eff (ClapprEff eff) Unit)
-  → Eff (ClapprEff eff) Unit
+  ∷ Clappr
+  → (PlaybackError → Effect Unit)
+  → Effect Unit
 onPlaybackError clappr callback =
-  runEffFn2 onPlaybackErrorImpl clappr (mkEffFn1 callback)
+  runEffectFn2 onPlaybackErrorImpl clappr (mkEffectFn1 callback)
 
 -- | XXX: Fix error type
 foreign import data PlayerError ∷ Type
-foreign import onPlayerErrorImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (EffFn1 (ClapprEff eff) PlayerError Unit) Unit
+foreign import onPlayerErrorImpl ∷ EffectFn2 Clappr (EffectFn1 PlayerError Unit) Unit
 
 onPlayerError
-  ∷ forall eff
-  . Clappr
-  → (PlayerError → Eff (ClapprEff eff) Unit)
-  → Eff (ClapprEff eff) Unit
+  ∷ Clappr
+  → (PlayerError → Effect Unit)
+  → Effect Unit
 onPlayerError clappr callback =
-  runEffFn2 onPlayerErrorImpl clappr (mkEffFn1 callback)
+  runEffectFn2 onPlayerErrorImpl clappr (mkEffectFn1 callback)
 
-foreign import onPlayerFullscreenImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (EffFn1 (ClapprEff eff) Boolean Unit) Unit
+foreign import onPlayerFullscreenImpl ∷ EffectFn2 Clappr (EffectFn1 Boolean Unit) Unit
 
 onPlayerFullscreen
-  ∷ forall eff
-  . Clappr
-  → (Boolean → Eff (ClapprEff eff) Unit)
-  → Eff (ClapprEff eff) Unit
+  ∷ Clappr
+  → (Boolean → Effect Unit)
+  → Effect Unit
 onPlayerFullscreen clappr callback =
-  runEffFn2 onPlayerFullscreenImpl clappr (mkEffFn1 callback)
+  runEffectFn2 onPlayerFullscreenImpl clappr (mkEffectFn1 callback)
 
-foreign import onPlayerPauseImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (Eff (ClapprEff eff) Unit) Unit
+foreign import onPlayerPauseImpl ∷ EffectFn2 Clappr (Effect Unit) Unit
 
 onPlayerPause
-  ∷ forall eff
-  .  Clappr
-  → Eff (ClapprEff eff) Unit
-  → Eff (ClapprEff eff) Unit
-onPlayerPause = runEffFn2 onPlayerPauseImpl
+  ∷ Clappr
+  → Effect Unit
+  → Effect Unit
+onPlayerPause = runEffectFn2 onPlayerPauseImpl
 
-foreign import onPlayerPlayImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (Eff (ClapprEff eff) Unit) Unit
+foreign import onPlayerPlayImpl ∷ EffectFn2 Clappr (Effect Unit) Unit
 
 onPlayerPlay
-  ∷ forall eff
-  .  Clappr
-  → Eff (ClapprEff eff) Unit
-  → Eff (ClapprEff eff) Unit
-onPlayerPlay = runEffFn2 onPlayerPlayImpl
+  ∷ Clappr
+  → Effect Unit
+  → Effect Unit
+onPlayerPlay = runEffectFn2 onPlayerPlayImpl
 
-foreign import onPlayerReadyImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (Eff (ClapprEff eff) Unit) Unit
+foreign import onPlayerReadyImpl ∷ EffectFn2 Clappr (Effect Unit) Unit
 
 onPlayerReady
-  ∷ forall eff
-  .  Clappr
-  → Eff (ClapprEff eff) Unit
-  → Eff (ClapprEff eff) Unit
-onPlayerReady = runEffFn2 onPlayerReadyImpl
+  ∷ Clappr
+  → Effect Unit
+  → Effect Unit
+onPlayerReady = runEffectFn2 onPlayerReadyImpl
 
 -- | XXX: Fix size type
 foreign import data Size ∷ Type
-foreign import onPlayerResizeImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (EffFn1 (ClapprEff eff) Size Unit) Unit
+foreign import onPlayerResizeImpl ∷ EffectFn2 Clappr (EffectFn1 Size Unit) Unit
 
 onPlayerResize
-  ∷ forall eff
-  . Clappr
-  → (Size → Eff (ClapprEff eff) Unit)
-  → Eff (ClapprEff eff) Unit
+  ∷ Clappr
+  → (Size → Effect Unit)
+  → Effect Unit
 onPlayerResize clappr callback =
-  runEffFn2 onPlayerResizeImpl clappr (mkEffFn1 callback)
+  runEffectFn2 onPlayerResizeImpl clappr (mkEffectFn1 callback)
 
-foreign import onPlayerStopImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (Eff (ClapprEff eff) Unit) Unit
+foreign import onPlayerStopImpl ∷ EffectFn2 Clappr (Effect Unit) Unit
 
 onPlayerStop
-  ∷ forall eff
-  .  Clappr
-  → Eff (ClapprEff eff) Unit
-  → Eff (ClapprEff eff) Unit
-onPlayerStop = runEffFn2 onPlayerStopImpl
+  ∷  Clappr
+  → Effect Unit
+  → Effect Unit
+onPlayerStop = runEffectFn2 onPlayerStopImpl
 
 type Progress =
   { current ∷ Number
   , total ∷ Number
   }
 
-foreign import onPlayerTimeupdateImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (EffFn1 (ClapprEff eff) Progress Unit) Unit
+foreign import onPlayerTimeupdateImpl ∷ EffectFn2 Clappr (EffectFn1 Progress Unit) Unit
 
 onPlayerTimeupdate
-  ∷ forall eff
-  . Clappr
-  → (Progress → Eff (ClapprEff eff) Unit)
-  → Eff (ClapprEff eff) Unit
+  ∷ Clappr
+  → (Progress → Effect Unit)
+  → Effect Unit
 onPlayerTimeupdate clappr callback =
-  runEffFn2 onPlayerTimeupdateImpl clappr (mkEffFn1 callback)
+  runEffectFn2 onPlayerTimeupdateImpl clappr (mkEffectFn1 callback)
 
-foreign import onPlayerVolumeupdateImpl ∷ ∀ eff. EffFn2 (ClapprEff eff) Clappr (EffFn1 (ClapprEff eff) Number Unit) Unit
+foreign import onPlayerVolumeupdateImpl ∷ EffectFn2 Clappr (EffectFn1 Number Unit) Unit
 
 onPlayerVolumeupdate
-  ∷ forall eff
-  . Clappr
-  → (Number → Eff (ClapprEff eff) Unit)
-  → Eff (ClapprEff eff) Unit
+  ∷ Clappr
+  → (Number → Effect Unit)
+  → Effect Unit
 onPlayerVolumeupdate clappr callback =
-  runEffFn2 onPlayerVolumeupdateImpl clappr (mkEffFn1 callback)
+  runEffectFn2 onPlayerVolumeupdateImpl clappr (mkEffectFn1 callback)
 
 -- http://clappr.github.io/classes/Events.html
 -- onContainerDestroyed
