@@ -1,6 +1,7 @@
+/*jshint esversion: 6 */
+
 const BowerResolvePlugin = require("bower-resolve-webpack-plugin");
 const path = require('path');
-const webpack = require('webpack');
 
 module.exports = {
   entry: path.resolve(__dirname, './output/Examples.Plugins.Main/index.js'),
@@ -12,8 +13,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'Clappr': 'clappr/dist/clappr.js',
-      'clappr-thumbnails-plugin': 'clappr-thumbnails-plugin/dist/clappr-thumbnails-plugin.js'
+      'Clappr': 'clappr/dist/clappr.js'
     },
     plugins: [
       new BowerResolvePlugin()

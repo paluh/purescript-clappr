@@ -1,26 +1,28 @@
 {
   "dependencies": {
-    "clappr": "git@github.com:clappr/clappr",
-    "purescript-web-dom": "",
-    "purescript-web-html": "",
-    "purescript-effect": "",
-    "purescript-exceptions": "",
-    "purescript-foreign": "",
-    "purescript-foreign-generic": "",
-    "purescript-functions": "",
-    "purescript-maybe": "",
-    "purescript-nullable": "",
-    "purescript-record": "",
-    "purescript-typelevel-prelude": "",
-    "purescript-aff": "",
-    "purescript-affjax": "",
-    "purescript-numbers": "",
-    "purescript-variant": ""
+    "clappr": "^0.3.3",
+    "clappr-thumbnails-plugin": "npm:clappr-thumbnails-plugin#^3.7.0",
+    "hls.js": "^0.10.1",
+    "purescript-aff": "^5.1.1",
+    "purescript-affjax": "^9.0.0",
+    "purescript-effect": "^2.0.1",
+    "purescript-exceptions": "^4.0.0",
+    "purescript-foreign": "^5.0.0",
+    "purescript-foreign-generic": "^9.0.0",
+    "purescript-functions": "^4.0.0",
+    "purescript-maybe": "^4.0.1",
+    "purescript-nullable": "^4.1.1",
+    "purescript-numbers": "^6.0.0",
+    "purescript-record": "^2.0.0",
+    "purescript-refs": "^4.1.0",
+    "purescript-typelevel-prelude": "^4.0.0",
+    "purescript-variant": "^6.0.0",
+    "purescript-web-dom": "^2.0.0",
+    "purescript-web-html": "^2.0.0"
   },
   "devDependencies": {
-    "purescript-psci-support": "",
-    "purescript-debug": "",
-    "purescript-refs": "^4.1.0"
+    "purescript-debug": "^4.0.0",
+    "purescript-psci-support": "^4.0.0"
   },
   "ignore": [
     "**/.*",
