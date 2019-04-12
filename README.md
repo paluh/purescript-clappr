@@ -30,18 +30,7 @@ This library installs some dependencies using `bower-npm-resolver` so you have t
 }
 ```
 
-## Examples
-
-There are separate examples provided:
-
-  * `examples/simple` - just shows how to use basic clappr player,
-
-  * `examples/events` - provides example of how to attach event handlers,
-
-  * `examples/plugins` - contains code which configures and uses some provided by this lib plugins.
-
-
-### Webpack builds
+### Webpack suggestions
 
 
 If you work with webpack I can suggest taking a look into examples webpack files. I'm using a combination of "hacks" to make clappr build working. I think the most important piece is this:
@@ -51,6 +40,17 @@ If you work with webpack I can suggest taking a look into examples webpack files
 ```
 
 Please check for example `./examples/simple/webpack.config.js` for details.
+
+
+## Examples
+
+There are separate examples provided:
+
+  * `examples/simple` - just shows how to use basic clappr player,
+
+  * `examples/events` - provides example of how to attach event handlers,
+
+  * `examples/plugins` - contains code which configures and uses some provided by this lib plugins.
 
 
 ### Testing
