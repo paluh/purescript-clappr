@@ -8,6 +8,7 @@ import Clappr.Plugins.ClickToPause as ClickToPause
 import Clappr.Plugins.Favicon (setup) as Favicon
 import Clappr.Plugins.FlasHls (flashVersion)
 import Clappr.Plugins.FlasHls (setup) as FlasHls
+import Clappr.Plugins.LevelSelector (setup) as LevelSelector
 import Clappr.Plugins.Poster (Poster(..), setup) as Poster
 import Clappr.Plugins.ReplayOnBuffering (Timeout(..), setup) as ReplayOnBuffering
 import Clappr.Plugins.ResponsiveContainer as ResponsiveContainer
@@ -64,6 +65,10 @@ main { parentId, source } = do
             ]
         }
       <<< ReplayOnBuffering.setup (ReplayOnBuffering.Timeout 10)
+      <<< LevelSelector.setup
+          { title: Nothing
+          , label: \i → show i.level.width <> " x " <> show i.level.height
+          }
       -- | If you want to test PlayerSize plugin please disable ResponsiveContainer
       -- <<< PlayerSize.setup { height: px 620.0, width: pct 80.0 }
       <<< ResponsiveContainer.setup { height: 9.0, width: 16.0 }
