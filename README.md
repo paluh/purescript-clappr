@@ -2,8 +2,6 @@
 
 Purescript bindings to Clappr video player.
 
-__Not ported to ps-0.12 (tested against ps-0.11.7).__
-
 ## Status
 
 Bindings cover:
