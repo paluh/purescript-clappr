@@ -63,13 +63,9 @@ You can build examples against cloned library code:
 
   * `$ bower install`
 
-Here we are building example for plugins usage:
+Here we are building example for `plugins` usage:
 
-  * `$ pulp build -I examples/plugins/src --build-path examples/plugins/output`
-
-  * `$ webpack --config examples/plugins/webpack.config.js`
-
-  * `cd ./examples/plugins`
+  * ./bin/examples.sh
 
   * Now edit `./examples/plugins/index.html` and provide your video url (for example hls playlist url) there (optionally you can provide also your streamroot key)
 

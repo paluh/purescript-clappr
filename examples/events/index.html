@@ -1,16 +1,36 @@
 <!doctype>
 <html>
 <head>
-    <title>Purescript clappr events logging</title>
+    <title>purescript-clappr events example</title>
+    <!-- let's use bootstrap to test responsive container plugin -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 </head>
 <body>
-  <p>Player should appear just below if you have configured hls address in index.html correctly.</p>
-  <p>Please check console to see event logging and also check `README.md` and `src/Main.purs` for additional info.</p>
-  <div class="player" id="clappr"></div>
-  <script type="text/javascript" src="./examplesEvents.js"></script>
-  <script type="text/javascript">
-    // provide video url here
-    var source = "VIDEO URL HERE";
-    examplesEvents.main({ parentId: "#clappr", source: source })();
-  </script>
-<body>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>purescript-clappr plugins example</h1>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <p>
+      To run this example you have to compile it - there is a `Makefile` in root directory and instruction in README how to do this ;-)
+      </p>
+      <p>
+      You should also edit index.html for this example and setup video url value.
+      </p>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div id="player"></div>
+      <script type="text/javascript" src="./examplesEvents.js"></script>
+      <script>
+        // Plase provide hls url here
+        var source = "VIDEO URL";
+        examplesEvents.main({
+          source: source,
+          parentId: "#player"
+        })();
+      </script>
+    </div>
+  </div>
+</div>
+</body>

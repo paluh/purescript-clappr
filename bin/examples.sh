@@ -10,4 +10,6 @@ build simple
 
 build plugins
 
+build events
+
 python -m http.server
