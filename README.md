@@ -22,7 +22,15 @@ Bindings cover:
 
 ## Installation
 
-You should install npm packages which can be found in `./package.json` like (`clappr`, `clappr-thumbnails-plugin`) by yourself to use this lib in your project as this transitive dependencies won't be installed by `bower`, `psc-package` or `spago`.
+This library installs some dependencies using `bower-npm-resolver` so you have to use install this resolver and `.bowerrc` like this:
+
+```json
+{
+  "resolvers": [
+    "bower-npm-resolver"
+  ]
+}
+```
 
 ## Examples
 
@@ -34,10 +42,11 @@ There are separate examples provided:
 
   * `examples/plugins` - contains code which configures and uses some provided by this lib plugins.
 
+
 ### Webpack builds
 
 
-I'm using a combination of "hacks" to make clappr build working. I think the most important piece is this:
+If you work with webpack I can suggest taking a look into examples webpack files. I'm using a combination of "hacks" to make clappr build working. I think the most important piece is this:
 
 ```javascript
     alias: { Clappr: 'clappr/dist/clappr.js', 'clappr-thumbnails-plugin': 'clappr-thumbnails-plugin/dist/clappr-thumbnails-plugin.js' },
@@ -46,11 +55,13 @@ I'm using a combination of "hacks" to make clappr build working. I think the mos
 Please check for example `./examples/simple/webpack.config.js` for details.
 
 
-### Installation and compilation
+### Testing
 
 You can build examples against cloned library code:
 
   * `$ npm install`
+
+  * echo '{ "resolvers": [ "bower-npm-resolver" ] }' >> .bowerrc
 
   * `$ bower install`
 
