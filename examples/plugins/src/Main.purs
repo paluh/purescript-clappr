@@ -3,11 +3,10 @@ module Examples.Plugins.Main where
 import Prelude
 
 import Clappr (Clappr, Options) as Clappr
-import Clappr (Parent(..), clappr, flasHls, toNativeOptions)
+import Clappr (Parent(..), clappr, toNativeOptions)
 import Clappr.Plugins.ClickToPause as ClickToPause
 import Clappr.Plugins.Favicon (setup) as Favicon
-import Clappr.Plugins.FlasHls (flashVersion)
-import Clappr.Plugins.FlasHls (setup) as FlasHls
+import Clappr.Plugins.FlasHls (trySetup) as FlasHls
 import Clappr.Plugins.LevelSelector (setup) as LevelSelector
 import Clappr.Plugins.Poster (Poster(..), setup) as Poster
 import Clappr.Plugins.ReplayOnBuffering (Timeout(..), setup) as ReplayOnBuffering
@@ -48,12 +47,10 @@ main ∷
   }
   → Effect Clappr.Clappr
 main { parentId, source } = do
-  fv ← flashVersion
-  flash ← flasHls
+  setupFlash ← FlasHls.trySetup "/node_modules/clappr/dist"
   let
-    baseUrl = "/node_modules/clappr/dist"
     o
-      = FlasHls.setup fv flash baseUrl
+      = setupFlash
       <<< Poster.setup (Just { poster: Poster.Url posterUrl, showOnVideoEnd: false, showForNoOp: false })
       <<< Thumbnails.setup
         { backdropHeight: Just 80

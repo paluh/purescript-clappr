@@ -1,4 +1,4 @@
-/* globals exports */
+/* globals exports, navigator */
 
 // Copied from stack overflow answer. It was originally taken from closure compiler:
 // https://stackoverflow.com/questions/159261/cross-browser-flash-detection-in-javascript
@@ -36,4 +36,8 @@ exports.flashVersionImpl = function() {
       }
   }
   return (a ? b : null);
+};
+
+exports.canUseFlash = function() {
+  return (navigator.userAgent.indexOf("Firefox/61") === -1 && navigator.userAgent.indexOf('Firefox/62') === -1 && navigator.userAgent.indexOf('Firefox/60') === -1);
 };

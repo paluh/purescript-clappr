@@ -1,6 +1,7 @@
 module Clappr.Plugins.LevelSelector where
 
-import Clappr (Plugin, NativeOptionsRow)
+import Clappr (Plugin)
+import Clappr (NativeOptionsRow) as Clappr
 import Data.Array ((:))
 import Data.Function.Uncurried (Fn2, mkFn2)
 import Data.Maybe (Maybe)
@@ -41,14 +42,14 @@ type NativeConfig =
   , labelCallback ∷ Fn2 Info Undefined String
   }
 
-type ConfigRow r = ( levelSelectorConfig ∷ NativeConfig | r )
+type NativeOptionsRow r = ( levelSelectorConfig ∷ NativeConfig | r )
 
 setup
   ∷ ∀ r
   . Lacks "levelSelectorConfig" r
   ⇒ Config
-  → { | NativeOptionsRow + r }
-  → { | NativeOptionsRow + ConfigRow + r }
+  → { | Clappr.NativeOptionsRow + r }
+  → { | Clappr.NativeOptionsRow + NativeOptionsRow + r }
 setup cfg opts =
   insert (SProxy ∷ SProxy "levelSelectorConfig") cfg' opts'
   where
