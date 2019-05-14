@@ -1,10 +1,10 @@
 # purescript-clappr
 
-Purescript bindings to Clappr video player.
+Bindings to Clappr video player for Purescript.
 
 ## Status
 
-Bindings cover:
+This binding covers:
 
   * basic options
 
@@ -18,9 +18,11 @@ Bindings cover:
 
   * `ResponsiveContainer` keeps proportions provided by user and resizing to the parent container
 
+  * `ReplayOnBuffering` reloads playback after a given timeout of buffering.
+
 ## Installation
 
-This library installs some dependencies using `bower-npm-resolver` so you have to use install this resolver and `.bowerrc` like this:
+This library installs some dependencies using `bower-npm-resolver`, so you have to install this resolver and use `.bowerrc` like this:
 
 ```json
 {
@@ -33,13 +35,13 @@ This library installs some dependencies using `bower-npm-resolver` so you have t
 ### Webpack suggestions
 
 
-If you work with webpack I can suggest taking a look into examples webpack files. I'm using a combination of "hacks" to make clappr build working. I think the most important piece is this:
+If you work with webpack I can suggest taking a look into examples webpack files. I think the most important piece is this:
 
 ```javascript
     alias: { Clappr: 'clappr/dist/clappr.js', 'clappr-thumbnails-plugin': 'clappr-thumbnails-plugin/dist/clappr-thumbnails-plugin.js' },
 ```
 
-Please check for example `./examples/simple/webpack.config.js` for details.
+Please check for example this file: `./examples/simple/webpack.config.js` for details.
 
 
 ## Examples
@@ -59,15 +61,14 @@ You can build examples against cloned library code:
 
   * `$ npm install`
 
-  * echo '{ "resolvers": [ "bower-npm-resolver" ] }' >> .bowerrc
+  * `$ echo '{ "resolvers": [ "bower-npm-resolver" ] }' >> .bowerrc`
 
   * `$ bower install`
 
 Here we are building example for `plugins` usage:
 
-  * ./bin/examples.sh
+  * `$ ./bin/examples.sh` - this script runs `make` and starts simple http server (`python -m http.server`).
 
-  * Now edit `./examples/plugins/index.html` and provide your video url (for example hls playlist url) there (optionally you can provide also your streamroot key)
+  * Please follow the instruction on the examples page on `http://localhost:8000`.
 
-  * Run your favorite testing http server from within example directory (it should serve ./node_modules/clappr path for '.swf' file from root path) - for example: `$ python -m http.server`
 
