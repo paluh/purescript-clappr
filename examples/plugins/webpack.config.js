@@ -6,7 +6,7 @@ const path = require('path');
 module.exports = {
   entry: path.resolve(__dirname, './output/Examples.Plugins.Main/index.js'),
   output: {
-    filename: 'examplesPlugins.js',
+    filename: 'bundle.js',
     library: 'examplesPlugins',
     libraryTarget: 'var',
     path: path.resolve(__dirname),
