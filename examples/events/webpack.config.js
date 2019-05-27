@@ -4,7 +4,7 @@ const BowerResolvePlugin = require("bower-resolve-webpack-plugin");
 const path = require('path');
 
 module.exports = {
-  entry: path.resolve(__dirname, './output/Examples.Events.Main/index.js'),
+  entry: path.resolve(__dirname, '../../output/Examples.Events.Main/index.js'),
   output: {
     filename: 'bundle.js',
     library: 'examplesEvents',

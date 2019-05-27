@@ -10,7 +10,4 @@
 examples/events/bundle.js
 examples/simple/bundle.js
 examples/plugins/bundle.js
-examples/events/output/
-examples/plugins/output/
-examples/simple/output/
 package-lock.json

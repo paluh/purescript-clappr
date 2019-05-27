@@ -54,9 +54,6 @@ There are separate examples provided:
 
   * `examples/plugins` - contains code which configures and uses some provided by this lib plugins.
 
-
-### Testing
-
 You can build examples against cloned library code:
 
   * `$ npm install`
@@ -65,10 +62,9 @@ You can build examples against cloned library code:
 
   * `$ bower install`
 
-Here we are building example for `plugins` usage:
-
-  * `$ ./bin/examples.sh` - this script runs `make` and starts simple http server (`python -m http.server`).
+  * `$ make` or `$ ./bin/examples.sh` - this script runs `make` and starts simple http server (`python -m http.server`).
 
   * Please follow the instruction on the examples page on `http://localhost:8000`.
 
+Please note that all examples are compiled into `./output` dir to simplify developement flow. I mean compilation and editing from the root dir and auto rebuild using by for example: `$ webpack --watch examples/plugins/webpack.config.js`).
 
