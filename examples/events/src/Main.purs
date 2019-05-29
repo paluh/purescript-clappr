@@ -5,10 +5,10 @@ import Prelude
 import Clappr (Parent(..), clappr, toNativeOptions)
 import Clappr.Events (onContainerBitrate, onContainerError, onPlaybackError, onPlayerError, onPlayerFullscreen, onPlayerPause, onPlayerPlay, onPlayerReady, onPlayerResize, onPlayerTimeupdate, onPlayerVolumeupdate)
 import Data.Maybe (Maybe(..))
-import Debug.Trace (traceM)
 import Effect (Effect)
 import Effect.Class.Console (log)
 import Effect.Ref (new, read, write) as Ref
+import Global.Unsafe (unsafeStringify)
 
 main
   ∷ { parentId ∷ String, source ∷ String }
@@ -28,35 +28,35 @@ main cfg = do
   c ← clappr opts
   onContainerBitrate c (\b → do
     log "CONTAINER_BITRATE"
-    traceM b)
+    log $ unsafeStringify b)
   onContainerError c (\e → do
     log "CONTAINER_ERROR"
-    traceM e)
+    log $ unsafeStringify e)
   onPlaybackError c (\e → do
     log "PLAYBACK_ERROR"
-    traceM e)
+    log $ unsafeStringify e)
   onPlayerError c (\e → do
     log "PLAYER_ERROR"
     log "Have you changed fake hls url in index.html?"
-    traceM e)
+    log $ unsafeStringify e)
   onPlayerFullscreen c (\b → do
     log "PLAYER_FULLSCREEN"
-    traceM b)
+    log $ unsafeStringify b)
   onPlayerPause c (log "PLAYER_PAUSE")
   onPlayerPlay c (log "PLAYER_PLAY")
   onPlayerReady c (log "PLAYER_READY")
   onPlayerResize c (\s → do
     log "PLAYER_RESIZE"
-    traceM s)
+    log $ unsafeStringify s)
   -- throttling timeupdate a bit
   ir ← Ref.new 0
   onPlayerTimeupdate c (\p → do
     i ← Ref.read ir
     when (i `mod` 50 == 0) do
       log "PLAYER_TIMEUPDATE (throttled)"
-      traceM p
+      log $ unsafeStringify p
     Ref.write (i + 1) ir)
   onPlayerVolumeupdate c (\v → do
     log "PLAYER_VOLUMEUPDATE"
-    traceM v)
+    log $ unsafeStringify v)
   log "Hello sailor!"

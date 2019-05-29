@@ -6,7 +6,8 @@ import Data.Maybe (Maybe(..))
 import Data.Nullable (Nullable, toNullable)
 import Effect (Effect)
 import Effect.Uncurried (EffectFn1, runEffectFn1)
-import Record.Builder (build, insert)
+import Prim.Row (class Lacks)
+import Record (insert, set)
 import Type.Prelude (SProxy(..))
 import Unsafe.Coerce (unsafeCoerce)
 import Web.HTML (HTMLElement)
@@ -66,20 +67,23 @@ type NativeOptions r = Record (NativeOptionsRow r)
 
 foreign import clapprImpl ∷ ∀ p. EffectFn1 (NativeOptions p) Clappr
 
-toNativeOptions ∷ Options → NativeOptions ()
-toNativeOptions options = build parent
-  { autoPlay: options.autoPlay
-  , baseUrl: toNullable options.baseUrl
-  , hlsjsConfig: toNullable options.hlsjsConfig
-  , hlsRecoverAttempts: toNullable options.hlsRecoverAttempts
-  , mute: options.mute
-  , plugins: plugins
-  , source: options.source
-  }
- where
-  _parentId = SProxy ∷ SProxy "parentId"
-  _parent = SProxy ∷ SProxy "parent"
-  parent = case options.parent of
-    ParentId p → insert _parentId (toNullable (Just p)) <<< insert _parent (toNullable Nothing)
-    Parent p → insert _parentId (toNullable Nothing) <<< insert _parent (toNullable (Just p))
-  plugins = []
+toNativeOptions
+  ∷ ∀ r
+  . (Lacks "plugins" r)
+  ⇒ (Lacks "parentId" r)
+  ⇒ OptionsBase (parent ∷ Parent | r)
+  → NativeOptions r
+toNativeOptions options
+  = insert (SProxy ∷ SProxy "plugins") []
+  <<< parent
+  <<< set (SProxy ∷ SProxy "baseUrl") (toNullable options.baseUrl)
+  <<< set (SProxy ∷ SProxy "hlsjsConfig") (toNullable options.hlsjsConfig)
+  <<< set (SProxy ∷ SProxy "hlsRecoverAttempts") (toNullable options.hlsRecoverAttempts)
+  $ options
+  where
+    _parentId = SProxy ∷ SProxy "parentId"
+    _parent = SProxy ∷ SProxy "parent"
+    parent = case options.parent of
+      ParentId p → insert _parentId (toNullable (Just p)) <<< set _parent (toNullable Nothing)
+      Parent p → insert _parentId (toNullable Nothing) <<< set _parent (toNullable (Just p))
+
