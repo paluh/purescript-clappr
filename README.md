@@ -20,6 +20,10 @@ This binding covers:
 
   * `ReplayOnBuffering` reloads playback after a given timeout of buffering.
 
+  * `ClickToStop` because `ClickToPause` doesn't work for live streams.
+
+  * `MediaControl` to customize control bar.
+
 ## Installation
 
 This library installs some dependencies using `bower-npm-resolver`, so you have to install this resolver and use `.bowerrc` like this:

@@ -5,6 +5,8 @@
   "dependencies": {
     "bower-npm-resolver": "^0.10.0",
     "bower-resolve-webpack-plugin": "^1.0.4",
+    "hls.js": "^0.12.4",
+    "level-selector": "^0.2.0",
     "webpack": "^3.10.0"
   }
 }

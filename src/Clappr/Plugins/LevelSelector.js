@@ -3,5 +3,5 @@
 
 // module Clappr.Plugins.LevelSelector
 
-exports.levelSelector = require('clappr-level-selector-plugin');
+exports.levelSelector = require('level-selector');
 

@@ -28,6 +28,7 @@ toPlugin = unsafeCoerce
 type OptionsBase o =
   { autoPlay ∷ Boolean
   , baseUrl ∷ Maybe String
+  , hideMediaControl ∷ Boolean
   , hlsjsConfig ∷ Maybe HlsjsConfig
   , hlsRecoverAttempts ∷ Maybe Int
   , mute ∷ Boolean
@@ -54,6 +55,7 @@ foreign import hlsjsDefaultConfig ∷ HlsjsConfig
 type NativeOptionsRow r =
   ( autoPlay ∷ Boolean
   , baseUrl ∷ Nullable String
+  , hideMediaControl ∷ Boolean
   , hlsjsConfig ∷ Nullable HlsjsConfig
   , hlsRecoverAttempts ∷ Nullable Int
   , mute ∷ Boolean
@@ -66,7 +68,6 @@ type NativeOptionsRow r =
 type NativeOptions r = Record (NativeOptionsRow r)
 
 foreign import clapprImpl ∷ ∀ p. EffectFn1 (NativeOptions p) Clappr
-
 toNativeOptions
   ∷ ∀ r
   . (Lacks "plugins" r)

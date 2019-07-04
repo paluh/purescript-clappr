@@ -1,8 +1,7 @@
-{
-  "dependencies": {
-    "clappr": "^0.3.3",
+{ "dependencies": {
+    "clappr": "^0.3.6",
     "clappr-thumbnails-plugin": "npm:clappr-thumbnails-plugin#^3.7.0",
-    "clappr-level-selector-plugin": "npm:level-selector#^0.2.0",
+    "level-selector": "npm:level-selector#^0.2.0",
     "hls.js": "^0.10.1",
     "purescript-aff": "^5.1.1",
     "purescript-affjax": "^9.0.0",

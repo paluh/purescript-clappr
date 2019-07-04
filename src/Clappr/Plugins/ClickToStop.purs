@@ -1,4 +1,4 @@
-module Clappr.Plugins.ClickToPause where
+module Clappr.Plugins.ClickToStop where
 
 import Prelude
 
@@ -10,9 +10,9 @@ import Record (insert)
 import Type.Prelude (SProxy(..))
 import Type.Row (type (+))
 
-foreign import clickToPause ∷ Plugin
+foreign import clickToStop ∷ Plugin
 
-type NativeOptionsRow r = (clickToPause ∷ Unit | r)
+type NativeOptionsRow r = (clickToStop ∷ Unit | r)
 
 setup
   ∷ ∀ r
@@ -21,6 +21,6 @@ setup
   ⇒ Clappr.NativeOptions r
   → Clappr.NativeOptions (NativeOptionsRow + r)
 setup opts =
-  insert (SProxy ∷ SProxy "clickToPause") unit opts'
+  insert (SProxy ∷ SProxy "clickToStop") unit opts'
   where
-    opts' = opts { plugins = clickToPause : opts.plugins }
+    opts' = opts { plugins = clickToStop : opts.plugins }

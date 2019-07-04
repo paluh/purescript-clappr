@@ -21,7 +21,6 @@ exports.flasHls = function() {
 exports.hls = clappr.HLS;
 
 exports.clapprImpl = function(options) {
-  options.hideMediaControl = true;
   return new clappr.Player(options);
 };
 
