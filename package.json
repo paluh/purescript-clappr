@@ -1,12 +1,13 @@
 {
   "devDependencies": {
-    "pulp": "^12.3.1"
+    "pulp": "^12.3.1",
+    "bower-resolve-webpack-plugin": "^1.0.4",
+    "webpack": "^3.10.0"
   },
   "dependencies": {
-    "bower-npm-resolver": "^0.10.0",
-    "bower-resolve-webpack-plugin": "^1.0.4",
+    "clappr": "^0.3.6",
+    "clappr-thumbnails-plugin": "^3.7.1",
     "hls.js": "^0.12.4",
-    "level-selector": "^0.2.0",
-    "webpack": "^3.10.0"
+    "level-selector": "^0.2.0"
   }
 }

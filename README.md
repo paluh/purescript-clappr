@@ -12,7 +12,7 @@ This binding covers:
 
   * most of built-in plugins
 
-  * two extra plugins: `ResponsiveContainer` and `ReplayOnBuffering`
+  * some extra plugins (more info below)
 
 ## Extra Plugins
 
@@ -26,15 +26,8 @@ This binding covers:
 
 ## Installation
 
-This library installs some dependencies using `bower-npm-resolver`, so you have to install this resolver and use `.bowerrc` like this:
+Beside bower dependencies which you can by running `bower install` you have to remember to install also these packages through npm in your project: `clappr`, `clappr-thumbails-plugin`, `hls.js`, `level-selector`.
 
-```json
-{
-  "resolvers": [
-    "bower-npm-resolver"
-  ]
-}
-```
 
 ### Webpack suggestions
 
@@ -57,6 +50,7 @@ There are separate examples provided:
   * `examples/events` - provides example of how to attach event handlers,
 
   * `examples/plugins` - contains code which configures and uses some provided by this lib plugins.
+
 
 You can build examples against cloned library code:
 
