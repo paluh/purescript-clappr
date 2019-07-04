@@ -20,29 +20,35 @@ exports.mediaControlSetup = function(config) {
     removeArrayItem(settings.right, control);
   };
   return clappr.MediaControl.extend({
-    initialize: function() {
-      this.settings = {};
-    },
     getSettings: function() {
+      // var newSettings = clappr.MediaControl.prototype.getSettings.apply(this);
+      var newSettings = { default: [], right: [], left: [] };
+
       if(config === null) {
-        return;
+        return newSettings;
       }
-      var newSettings = clappr.MediaControl.prototype.getSettings.apply(this);
-      console.log(newSettings);
-      if(!config.fullScreen) {
-        dropControl(newSettings, 'fullscreen');
+      if(config.playStop) {
+        newSettings.left.push('playstop');
       }
-      if(!config.seekBar) {
-        dropControl(newSettings, 'seekbar');
+      if(config.position) {
+        newSettings.left.push('position');
       }
-      if(!config.hdIndicator) {
-        dropControl(newSettings, 'hd-indicator');
+      if(config.duration) {
+        newSettings.left.push('duration');
       }
-      if(!config.volume) {
-        dropControl(newSettings, 'volume');
+
+      if(config.seekBar) {
+        newSettings.default.push('seekbar');
       }
-      if(!config.playStop) {
-        dropControl(newSettings, 'playstop');
+
+      if(config.hdIndicator) {
+        newSettings.right.push('hd-indicator');
+      }
+      if(config.fullScreen) {
+        newSettings.right.push('fullscreen');
+      }
+      if(config.volume) {
+        newSettings.right.push('volume');
       }
       return newSettings;
     },

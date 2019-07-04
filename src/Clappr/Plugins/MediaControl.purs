@@ -15,9 +15,11 @@ import Type.Row (type (+))
 -- | `hide` sets just `hideMediaControl` option in clappr
 -- | which is responsible for autohiding.
 type Config =
-  { fullScreen ∷ Boolean
+  { duration ∷ Boolean
+  , fullScreen ∷ Boolean
   , hdIndicator ∷ Boolean
   , playStop ∷ Boolean
+  , position ∷ Boolean
   , seekBar ∷ Boolean
   , volume ∷ Boolean
   }

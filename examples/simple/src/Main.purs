@@ -10,6 +10,7 @@ opts ∷ { parentId ∷ String, source ∷ String } → Options
 opts { parentId, source } =
   { autoPlay: true
   , baseUrl: Nothing
+  , hideMediaControl: true
   , hlsjsConfig: Nothing
   , hlsRecoverAttempts: Just 1
   , mute: false

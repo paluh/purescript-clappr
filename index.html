@@ -36,23 +36,6 @@
         </table>
       </div>
     </div>
-    <div id="player"></div>
-    <script>
-      // var source = 'http://stream4.nadaje.com:8580/live/stream-1/playlist.m3u8';
-      var source = 'http://stream5.nadaje.com:16436/live/stream-1/playlist.m3u8';
-      window.player = new Clappr.Player({
-        plugins: {
-          'core': [VastAds]
-        },
-        VastAdsConfig: {
-          AdXMLUrl: 'http://adx.adform.net/adx/?mid=656537&t=2'
-        },
-        source: source,
-        parentId: "#player",
-        autoPlay: true,
-        mute: true
-      });
-    </script>
   </div>
 </body>
 </html>

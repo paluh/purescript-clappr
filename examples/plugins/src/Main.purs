@@ -8,6 +8,7 @@ import Clappr.Plugins.ClickToPause as ClickToPause
 import Clappr.Plugins.Favicon (setup) as Favicon
 import Clappr.Plugins.FlasHls (trySetup) as FlasHls
 import Clappr.Plugins.LevelSelector (setup) as LevelSelector
+import Clappr.Plugins.MediaControl (setup) as MediaControl
 import Clappr.Plugins.Poster (Poster(..), setup) as Poster
 import Clappr.Plugins.ReplayOnBuffering (Timeout(..), setup) as ReplayOnBuffering
 import Clappr.Plugins.ResponsiveContainer as ResponsiveContainer
@@ -20,6 +21,7 @@ opts ∷ String → String → Clappr.Options
 opts parentId source =
   { autoPlay: true
   , baseUrl: Nothing
+  , hideMediaControl: true
   , hlsjsConfig: Nothing
   , hlsRecoverAttempts: Just 1
   , mute: true
@@ -52,6 +54,16 @@ main { parentId, source } = do
     o
       = setupFlash
       <<< Poster.setup (Just { poster: Poster.Url posterUrl, showOnVideoEnd: false, showForNoOp: false })
+      <<< MediaControl.setup
+            (Just
+              { duration: true
+              , hdIndicator: true
+              , fullScreen: true
+              , position: true
+              , playStop: true
+              , seekBar: true
+              , volume: true
+              })
       <<< Thumbnails.setup
         { backdropHeight: Just 80
         , spotlightHeight: Just 80

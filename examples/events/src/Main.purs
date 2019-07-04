@@ -19,6 +19,7 @@ main cfg = do
       toNativeOptions
         { autoPlay: false
         , baseUrl: Nothing
+        , hideMediaControl: true
         , hlsjsConfig: Nothing
         , hlsRecoverAttempts: Nothing
         , mute: false
