@@ -12,8 +12,6 @@ import Record (insert)
 import Type.Prelude (SProxy(..))
 import Type.Row (type (+))
 
--- | `hide` sets just `hideMediaControl` option in clappr
--- | which is responsible for autohiding.
 type Config =
   { duration ∷ Boolean
   , fullScreen ∷ Boolean
