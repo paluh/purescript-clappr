@@ -12,15 +12,14 @@ import Type.Row (type (+))
 
 foreign import clickToStop ∷ Plugin
 
-type NativeOptionsRow r = (clickToStop ∷ Unit | r)
+type NativeOptionsRow r = (clickToPlaybackControl ∷ Unit | r)
 
 setup
   ∷ ∀ r
-  . Lacks "clickToPause" r
-  ⇒ Lacks "clickToStop" r
+  . Lacks "clickToPlaybackControl" r
   ⇒ Clappr.NativeOptions r
   → Clappr.NativeOptions (NativeOptionsRow + r)
 setup opts =
-  insert (SProxy ∷ SProxy "clickToStop") unit opts'
+  insert (SProxy ∷ SProxy "clickToPlaybackControl") unit opts'
   where
     opts' = opts { plugins = clickToStop : opts.plugins }
