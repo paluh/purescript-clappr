@@ -21,9 +21,8 @@ exports.mediaControlSetup = function(config) {
   };
   return clappr.MediaControl.extend({
     getSettings: function() {
-      // var newSettings = clappr.MediaControl.prototype.getSettings.apply(this);
+      var origSettings =  clappr.MediaControl.prototype.getSettings.apply(this);
       var newSettings = { default: [], right: [], left: [] };
-
       if(config === null) {
         return newSettings;
       }
@@ -36,11 +35,10 @@ exports.mediaControlSetup = function(config) {
       if(config.duration) {
         newSettings.left.push('duration');
       }
-
       if(config.seekBar) {
         newSettings.default.push('seekbar');
+        newSettings.seekEnabled = origSettings.seekEnabled;
       }
-
       if(config.hdIndicator) {
         newSettings.right.push('hd-indicator');
       }
