@@ -39,14 +39,14 @@ exports.mediaControlSetup = function(config) {
         newSettings.default.push('seekbar');
         newSettings.seekEnabled = origSettings.seekEnabled;
       }
-      if(config.hdIndicator) {
-        newSettings.right.push('hd-indicator');
-      }
       if(config.fullScreen) {
         newSettings.right.push('fullscreen');
       }
       if(config.volume) {
         newSettings.right.push('volume');
+      }
+      if(config.hdIndicator) {
+        newSettings.right.push('hd-indicator');
       }
       return newSettings;
     },

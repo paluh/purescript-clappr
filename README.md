@@ -56,13 +56,11 @@ You can build examples against cloned library code:
 
   * `$ npm install`
 
-  * `$ echo '{ "resolvers": [ "bower-npm-resolver" ] }' >> .bowerrc`
-
   * `$ bower install`
 
   * `$ make` or `$ ./bin/examples.sh` - this script runs `make` and starts simple http server (`python -m http.server`).
 
   * Please follow the instruction on the examples page on `http://localhost:8000`.
 
-Please note that all examples are compiled into `./output` dir to simplify developement flow. I mean compilation and editing from the root dir and auto rebuild using by for example: `$ webpack --watch examples/plugins/webpack.config.js`).
+Please note that all examples are compiled into `./output` dir to simplify developement flow. I mean compilation and editing from the root dir and auto rebuild using by for example: `$ webpack --watch --config examples/plugins/webpack.config.js`).
 

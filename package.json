@@ -5,9 +5,9 @@
     "webpack": "^3.10.0"
   },
   "dependencies": {
-    "clappr": "^0.3.6",
+    "clappr": "^0.3.8",
     "clappr-thumbnails-plugin": "^3.7.1",
-    "hls.js": "^0.12.4",
+    "hls.js": "^0.10.1",
     "level-selector": "^0.2.0"
   }
 }
