@@ -13,7 +13,7 @@
     "purescript-refs": "^4.1.0",
     "purescript-typelevel-prelude": "^5.0.0",
     "purescript-variant": "^6.0.0",
-    "purescript-web-dom": "^4.0.0",
+    "purescript-web-dom": "<4.0.0",
     "purescript-web-html": "^2.0.0"
   },
   "devDependencies": {
